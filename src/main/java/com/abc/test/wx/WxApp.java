@@ -14,6 +14,12 @@ import com.alibaba.fastjson.JSONObject;
 @Log4j
 public class WxApp {
 	
+	public static void main(String[] args) throws IOException {
+		WxMeta meta = start();
+		Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start " + meta.file_qrCode});
+
+	}
+	
 	public static WxMeta start() {
 		final WxMeta meta = new WxMeta();
 		
@@ -32,6 +38,8 @@ public class WxApp {
 				log.info("微信初始化...");
 				service.wxInit();
 				log.info("微信初始化成功");
+				
+				
 				
 				log.info("开启状态通知...");
 				service.openStatusNotify();

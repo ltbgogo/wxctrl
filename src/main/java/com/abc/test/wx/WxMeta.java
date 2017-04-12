@@ -35,7 +35,7 @@ public class WxMeta {
 	public JSONObject user;
 	
 	public File dir_root = new File("d://test/wx");
-	public File file_qrCode = FileUtils.getFile(dir_root, "qrcode.jpg");
+	public File file_qrCode = FileUtils.getFile(dir_root, "qrcode." + deviceId + ".jpg");
 	
 	public HttpClientConfig httpClientConfig;
 	

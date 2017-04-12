@@ -36,6 +36,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<!-- apache commons -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -45,7 +50,6 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.8</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -73,8 +77,9 @@
 				<configuration>
 					<classifier>exec</classifier>
 					<jvmArguments>
-            			-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
-          			</jvmArguments>
+						<!-- -Djsse.enableSNIExtension=false -Dhttps.protocols=TLSv1 -->
+						<!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005 -->
+					</jvmArguments>
 				</configuration>
 			</plugin>
 		</plugins>

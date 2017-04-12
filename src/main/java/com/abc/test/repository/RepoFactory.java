@@ -11,7 +11,7 @@ import com.abc.test.utility.SpringManager;
  */
 public interface RepoFactory {
 
-	WxUserRepository getWxUserRepo();
+	WxAccountRepository getWxAccountRepo();
 	UserRepository getUserRepo();
 	
 	RepoFactory f = (RepoFactory) Proxy.newProxyInstance(RepoFactory.class.getClassLoader(), new Class[] {RepoFactory.class}, new InvocationHandler() {
