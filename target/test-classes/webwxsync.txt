@@ -1,0 +1,177 @@
+{
+    "ModContactCount": 0,
+    "ModContactList": [],
+    "SyncCheckKey": {
+        "Count": 10,
+        "List": [
+            {
+                "Key": 1,
+                "Val": 662277072
+            },
+            {
+                "Key": 2,
+                "Val": 662283781
+            },
+            {
+                "Key": 3,
+                "Val": 662283443
+            },
+            {
+                "Key": 11,
+                "Val": 662283681
+            },
+            {
+                "Key": 13,
+                "Val": 662260129
+            },
+            {
+                "Key": 201,
+                "Val": 1491462142
+            },
+            {
+                "Key": 203,
+                "Val": 1491458887
+            },
+            {
+                "Key": 1000,
+                "Val": 1491439321
+            },
+            {
+                "Key": 1001,
+                "Val": 1491439351
+            },
+            {
+                "Key": 1002,
+                "Val": 1490880634
+            }
+        ]
+    },
+    "BaseResponse": {
+        "ErrMsg": "",
+        "Ret": 0
+    },
+    "Profile": {
+        "HeadImgUpdateFlag": 0,
+        "Status": 0,
+        "BindEmail": {
+            "Buff": ""
+        },
+        "Alias": "",
+        "HeadImgUrl": "",
+        "NickName": {
+            "Buff": ""
+        },
+        "BindMobile": {
+            "Buff": ""
+        },
+        "UserName": {
+            "Buff": ""
+        },
+        "BindUin": 0,
+        "PersonalCard": 0,
+        "BitFlag": 0,
+        "Signature": "",
+        "Sex": 0
+    },
+    "ModChatRoomMemberCount": 0,
+    "SKey": null,
+    "AddMsgCount": 1,
+    "SyncKey": {
+        "Count": 10,
+        "List": [
+            {
+                "Key": 1,
+                "Val": 662277072
+            },
+            {
+                "Key": 2,
+                "Val": 662283781
+            },
+            {
+                "Key": 3,
+                "Val": 662283443
+            },
+            {
+                "Key": 11,
+                "Val": 662283681
+            },
+            {
+                "Key": 13,
+                "Val": 662260129
+            },
+            {
+                "Key": 201,
+                "Val": 1491462142
+            },
+            {
+                "Key": 203,
+                "Val": 1491458887
+            },
+            {
+                "Key": 1000,
+                "Val": 1491439321
+            },
+            {
+                "Key": 1001,
+                "Val": 1491439351
+            },
+            {
+                "Key": 1002,
+                "Val": 1490880634
+            }
+        ]
+    },
+    "ContinueFlag": 0,
+    "DelContactList": [],
+    "ModChatRoomMemberList": [],
+    "DelContactCount": 0,
+    "AddMsgList": [
+        {
+            "MsgId": "1883632906022012913",
+            "ForwardFlag": 0,
+            "NewMsgId": 1883632906022012913,
+            "RecommendInfo": {
+                "VerifyFlag": 0,
+                "NickName": "",
+                "Scene": 0,
+                "UserName": "",
+                "QQNum": 0,
+                "Province": "",
+                "City": "",
+                "Signature": "",
+                "OpCode": 0,
+                "Ticket": "",
+                "Alias": "",
+                "AttrStatus": 0,
+                "Content": "",
+                "Sex": 0
+            },
+            "VoiceLength": 0,
+            "MsgType": 1,
+            "OriContent": "",
+            "Ticket": "",
+            "Url": "",
+            "AppInfo": {
+                "Type": 0,
+                "AppID": ""
+            },
+            "SubMsgType": 0,
+            "Content": "@d0e77b3f6b10621bc7eab011ae7cb168:<br/>过两天去孟买机场，巴基斯坦的卡拉奇机场 ，迪拜机场，都有pp贵宾厅，很是期待",
+            "AppMsgType": 0,
+            "ImgWidth": 0,
+            "PlayLength": 0,
+            "StatusNotifyCode": 0,
+            "StatusNotifyUserName": "",
+            "HasProductId": 0,
+            "MediaId": "",
+            "ToUserName": "@df87572871ddae82ae2dd9bf4358bb77e26547fd88e59834a594b01548e704c4",
+            "FileSize": "",
+            "Status": 3,
+            "FromUserName": "@@66233687b3a3fda3195d72752c2f1c1283e4dccf70205e8b07e8656e6e2b5566",
+            "ImgHeight": 0,
+            "ImgStatus": 1,
+            "FileName": "",
+            "CreateTime": 1491462142
+        }
+    ]
+}
