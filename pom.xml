@@ -40,7 +40,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency> 
 		<!-- apache commons -->
 		<dependency>
 			<groupId>commons-io</groupId>

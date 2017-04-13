@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 
@@ -31,11 +33,11 @@ public class WxService {
 	 */
 	public void getContact() {
 		@Cleanup
-		HttpClient client = createHttpClient(meta.base_uri + "/webwxgetcontact");
-		client.getQueryMap().put("pass_ticket", meta.pass_ticket);
-		client.getQueryMap().put("skey", meta.skey);
+		HttpClient client = createHttpClient(meta.getBase_uri() + "/webwxgetcontact");
+		client.getQueryMap().put("pass_ticket", meta.getPass_ticket());
+		client.getQueryMap().put("skey", meta.getSkey());
 		client.getQueryMap().put("r", DateUtil.seconds());
-		client.getContentJSONObject().put("BaseRequest", meta.baseRequest);
+		client.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
 		client.connect();
 		
 		JSONObject data = client.getResponseByJsonObject();
@@ -57,17 +59,17 @@ public class WxService {
 				continue;
 			}
 			// 自己
-			if (contact.getString("UserName").equals(meta.user.getString("UserName"))) {
+			if (contact.getString("UserName").equals(meta.getUser().getString("UserName"))) {
 				continue;
 			}
 			contactList.add(contact);
 		}
-		meta.contactList = contactList;
-		meta.memberList = data.getJSONArray("MemberList");
+		meta.setContactList(contactList);
+		meta.setMemberList(data.getJSONArray("MemberList"));
 	}
 	
 	private HttpClient createHttpClient(String url) {
-		return new HttpClient(url, meta.httpClientConfig);
+		return new HttpClient(url, meta.getHttpClientConfig());
 	}
 
 	/**
@@ -85,7 +87,7 @@ public class WxService {
 		
 		//window.QRLogin.code = 200; window.QRLogin.uuid = "QebhTea-mw=="; 
 		JSONObject data = this.parseWxSpec(client.getResponseByString());
-		meta.uuid = data.getString("window.QRLogin.uuid");
+		meta.setUuid(data.getString("window.QRLogin.uuid"));
 	}
 	
 	/**
@@ -94,12 +96,12 @@ public class WxService {
 	@SneakyThrows
 	public void getQrCode() {
 		@Cleanup
-		HttpClient c = createHttpClient(WxConst.QRCODE_URL + meta.uuid);
+		HttpClient c = createHttpClient(WxConst.QRCODE_URL + meta.getUuid());
 		c.getQueryMap().put("t", "webwx");
 		c.getQueryMap().put("_", DateUtil.seconds());
 		c.connect();
 		
-		FileUtils.copyInputStreamToFile(c.getResponseByStream(), meta.file_qrCode);
+		FileUtils.copyInputStreamToFile(c.getResponseByStream(), meta.getFile_qrCode());
 	}
 	
 	/**
@@ -112,7 +114,7 @@ public class WxService {
 			@Cleanup
 			HttpClient c = createHttpClient("https://login.weixin.qq.com/cgi-bin/mmwebwx-bin/login");
 			c.getQueryMap().put("tip", tip);
-			c.getQueryMap().put("uuid", meta.uuid);
+			c.getQueryMap().put("uuid", meta.getUuid());
 			c.getQueryMap().put("_", DateUtil.seconds());
 			c.connect();
 			
@@ -123,8 +125,8 @@ public class WxService {
 				log.info("成功扫描,请在手机上点击确认以登录");
 			} else if (code == 200) {
 				log.info("正在登录...");
-				meta.redirect_uri = data.getString("window.redirect_uri") + "&fun=new";
-				meta.base_uri = StringUtils.substringBeforeLast(meta.redirect_uri, "/");
+				meta.setRedirect_uri(data.getString("window.redirect_uri") + "&fun=new");
+				meta.setBase_uri(StringUtils.substringBeforeLast(meta.getRedirect_uri(), "/"));
 				break;
 			} else if (code == 408) {
 				throw new RuntimeException("登录超时");
@@ -140,19 +142,19 @@ public class WxService {
 	 */
 	public void login() {
 		@Cleanup
-		HttpClient c = createHttpClient(meta.redirect_uri);
+		HttpClient c = createHttpClient(meta.getRedirect_uri());
 		c.connect();
 		String data = c.getResponseByString();
-		meta.skey = RegexUtil.matchFirstGroup(data, "<skey>(\\S+)</skey>");
-		meta.wxsid = RegexUtil.matchFirstGroup(data, "<wxsid>(\\S+)</wxsid>");
-		meta.wxuin = RegexUtil.matchFirstGroup(data, "<wxuin>(\\S+)</wxuin>");
-		meta.pass_ticket = RegexUtil.matchFirstGroup(data, "<pass_ticket>(\\S+)</pass_ticket>");
+		meta.setSkey(RegexUtil.matchFirstGroup(data, "<skey>(\\S+)</skey>"));
+		meta.setWxsid(RegexUtil.matchFirstGroup(data, "<wxsid>(\\S+)</wxsid>"));
+		meta.setWxuin(RegexUtil.matchFirstGroup(data, "<wxuin>(\\S+)</wxuin>"));
+		meta.setPass_ticket(RegexUtil.matchFirstGroup(data, "<pass_ticket>(\\S+)</pass_ticket>"));
 
-		meta.baseRequest = new JSONObject();
-		meta.baseRequest .put("Uin", meta.wxuin);
-		meta.baseRequest .put("Sid", meta.wxsid);
-		meta.baseRequest .put("Skey", meta.skey);
-		meta.baseRequest .put("DeviceID", meta.deviceId);
+		meta.setBaseRequest(new JSONObject());
+		meta.getBaseRequest() .put("Uin", meta.getWxuin());
+		meta.getBaseRequest() .put("Sid", meta.getWxsid());
+		meta.getBaseRequest() .put("Skey", meta.getSkey());
+		meta.getBaseRequest() .put("DeviceID", meta.getDeviceId());
 	}
 
 	/**
@@ -160,13 +162,13 @@ public class WxService {
 	 */
 	public void openStatusNotify() {
 		@Cleanup
-		HttpClient client = createHttpClient(meta.base_uri + "/webwxstatusnotify");
+		HttpClient client = createHttpClient(meta.getBase_uri() + "/webwxstatusnotify");
 		client.getQueryMap().put("lang", "zh_CN");
-		client.getQueryMap().put("pass_ticket", meta.pass_ticket);
-		client.getContentJSONObject().put("BaseRequest", meta.baseRequest);
+		client.getQueryMap().put("pass_ticket", meta.getPass_ticket());
+		client.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
 		client.getContentJSONObject().put("Code", 3);
-		client.getContentJSONObject().put("FromUserName", meta.user.getString("UserName"));
-		client.getContentJSONObject().put("ToUserName", meta.user.getString("UserName"));
+		client.getContentJSONObject().put("FromUserName", meta.getUser().getString("UserName"));
+		client.getContentJSONObject().put("ToUserName", meta.getUser().getString("UserName"));
 		client.getContentJSONObject().put("ClientMsgId", DateUtil.seconds());
 		client.connect();
 		
@@ -189,28 +191,17 @@ public class WxService {
 	 */
 	public void wxInit() {
 		@Cleanup
-		HttpClient client = createHttpClient(meta.base_uri + "/webwxinit");
+		HttpClient client = createHttpClient(meta.getBase_uri() + "/webwxinit");
 		client.getQueryMap().put("r", DateUtil.seconds());
-		client.getQueryMap().put("pass_ticket", meta.pass_ticket);
-		client.getQueryMap().put("skey", meta.skey);
-		client.getContentJSONObject().put("BaseRequest", meta.baseRequest);
+		client.getQueryMap().put("pass_ticket", meta.getPass_ticket());
+		client.getQueryMap().put("skey", meta.getSkey());
+		client.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
 		client.connect();
 		
 		JSONObject data = client.getResponseByJsonObject();
 		this.validateRet(data, "微信初始化失败");
-		meta.syncKey = data.getJSONObject("SyncKey");
-		meta.user = data.getJSONObject("User");
-		this.refreshSyncKeyStr();
-	}
-	
-	private void refreshSyncKeyStr() {
-		StringBuffer synckey = new StringBuffer();
-		JSONArray list = meta.syncKey.getJSONArray("List");
-		for (int i = 0, len = list.size(); i < len; i++) {
-			JSONObject item = list.getJSONObject(i);
-			synckey.append("|" + item.getIntValue("Key") + "_" + item.getIntValue("Val"));
-		}
-		meta.synckeyStr = synckey.substring(1);
+		meta.setSyncKey(data.getJSONObject("SyncKey"));
+		meta.setUser(data.getJSONObject("User"));
 	}
 	
 	/**
@@ -219,7 +210,7 @@ public class WxService {
 	public void choiceSyncLine() {
 		for(String syncUrl : WxConst.SYNC_HOST){
 			try {
-				meta.webpush_url = "https://" + syncUrl + "/cgi-bin/mmwebwx-bin/synccheck";
+				meta.setWebpush_url("https://" + syncUrl + "/cgi-bin/mmwebwx-bin/synccheck");
 				int[] res = this.syncCheck();
 				if(res[0] == 0) {
 					log.info(String.format("选择线路：[%s]", syncUrl));
@@ -237,17 +228,17 @@ public class WxService {
 	 */
 	public int[] syncCheck() {
 		@Cleanup
-		HttpClient c = createHttpClient(meta.webpush_url);
-		c.getContentJSONObject().put("BaseRequest", meta.baseRequest);
+		HttpClient c = createHttpClient(meta.getWebpush_url());
+		c.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
 		c.getQueryMap().put("r", System.nanoTime());
-		c.getQueryMap().put("skey",	meta.skey);
-		c.getQueryMap().put("uin", meta.wxuin);
-		c.getQueryMap().put("sid", meta.wxsid);
-		c.getQueryMap().put("deviceid", meta.deviceId); 
-		c.getQueryMap().put("synckey", meta.synckeyStr); 
+		c.getQueryMap().put("skey",	meta.getSkey());
+		c.getQueryMap().put("uin", meta.getWxuin());
+		c.getQueryMap().put("sid", meta.getWxsid());
+		c.getQueryMap().put("deviceid", meta.getDeviceId()); 
+		c.getQueryMap().put("synckey", meta.getSynckeyStr()); 
 		c.getQueryMap().put("_", System.currentTimeMillis());
 		
-		System.out.println(meta.webpush_url);
+		System.out.println(meta.getWebpush_url());
 		System.out.println(c.getQueryMap());
 		c.connect();
 		////window.synccheck={retcode:"0",selector:"0"}
@@ -272,7 +263,7 @@ public class WxService {
 				} else if (msgType == 1) {
 					if (WxConst.FILTER_USERS.contains(msg.getString("ToUserName"))) {
 						continue;
-					} else if (msg.getString("FromUserName").equals(meta.user.getString("UserName"))) {
+					} else if (msg.getString("FromUserName").equals(meta.getUser().getString("UserName"))) {
 						continue;
 					} else if (msg.getString("ToUserName").indexOf("@@") != -1) {
 						String[] peopleContent = content.split(":<br/>");
@@ -286,12 +277,12 @@ public class WxService {
 				} else if (msgType == 3) {
 					String msgId = msg.getString("MsgId");
 					@Cleanup
-					HttpClient c = createHttpClient(meta.base_uri + "/webwxgetmsgimg");
+					HttpClient c = createHttpClient(meta.getBase_uri() + "/webwxgetmsgimg");
 					c.getQueryMap().put("MsgID", msgId);
-					c.getQueryMap().put("skey", meta.skey);
+					c.getQueryMap().put("skey", meta.getSkey());
 					c.getQueryMap().put("type", "slave");
 					c.connect();
-					File imagePath = FileUtils.getFile(meta.dir_root, "image", msgId + ".jpg");
+					File imagePath = FileUtils.getFile(meta.getDir_root(), "image", msgId + ".jpg");
 					imagePath.getParentFile().mkdirs();
 					log.info(imagePath);
 //					webwxsendmsg(wechatMeta, "二蛋还不支持图片呢", msg.getString("FromUserName"));
@@ -313,16 +304,16 @@ public class WxService {
 		JSONObject Msg = new JSONObject();
 		Msg.put("Type", 1);
 		Msg.put("Content", content);
-		Msg.put("FromUserName", meta.user.getString("UserName"));
+		Msg.put("FromUserName", meta.getUser().getString("UserName"));
 		Msg.put("ToUserName", to);
 		Msg.put("LocalID", clientMsgId);
 		Msg.put("ClientMsgId", clientMsgId);
 		
 		@Cleanup
-		HttpClient c = createHttpClient(meta.base_uri + "/webwxsendmsg");
+		HttpClient c = createHttpClient(meta.getBase_uri() + "/webwxsendmsg");
 		c.getQueryMap().put("lang", "zh_CN");
-		c.getQueryMap().put("pass_ticket", meta.pass_ticket);
-		c.getContentJSONObject().put("BaseRequest", meta.baseRequest);
+		c.getQueryMap().put("pass_ticket", meta.getPass_ticket());
+		c.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
 		c.getContentJSONObject().put("Msg", Msg);
 		c.connect();
 		
@@ -331,7 +322,7 @@ public class WxService {
 	
 	private String getUserRemarkName(String id) {
 		String name = "这个人物名字未知";
-		for (JSONObject member : JsonUtil.toJsonObjects(meta.memberList)) {
+		for (JSONObject member : JsonUtil.toJsonObjects(meta.getMemberList())) {
 			if (member.getString("UserName").equals(id)) {
 				if (StringUtils.isNotBlank(member.getString("RemarkName"))) {
 					name = member.getString("RemarkName");
@@ -346,18 +337,17 @@ public class WxService {
 	
 	public JSONObject webwxsync(){
 		@Cleanup
-		HttpClient c = createHttpClient(meta.base_uri + "/webwxsync");
-		c.getQueryMap().put("skey", meta.skey);
-		c.getQueryMap().put("sid", meta.wxsid);
-		c.getContentJSONObject().put("BaseRequest", meta.baseRequest);
-		c.getContentJSONObject().put("SyncKey", meta.syncKey);
+		HttpClient c = createHttpClient(meta.getBase_uri() + "/webwxsync");
+		c.getQueryMap().put("skey", meta.getSkey());
+		c.getQueryMap().put("sid", meta.getWxsid());
+		c.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
+		c.getContentJSONObject().put("SyncKey", meta.getSyncKey());
 		c.getContentJSONObject().put("rr", DateUtil.seconds());
 		c.connect();
 		
 		JSONObject data = c.getResponseByJsonObject();
 		this.validateRet(data, "同步syncKey失败");
-		meta.syncKey = data.getJSONObject("SyncKey");
-		this.refreshSyncKeyStr();
+		meta.setSyncKey(data.getJSONObject("SyncKey"));
 		
 		return data;
 	}

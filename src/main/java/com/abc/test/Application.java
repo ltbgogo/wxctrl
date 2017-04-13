@@ -1,8 +1,5 @@
 package com.abc.test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -12,9 +9,10 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 
 import com.abc.test.config.AppConfig;
+import com.abc.test.utility.SpringManager;
 
 @SpringBootApplication
-public class App {
+public class Application {
 
 	@Bean
 	ServletContextInitializer createServletContextInitializer() {
@@ -30,8 +28,13 @@ public class App {
 	AppConfig createAppConfig() {
 		return AppConfig.INSTANCE;
 	}
-
+	
+	@Bean
+	SpringManager createSpringManager() {
+		return new SpringManager();
+	}
+	
 	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }

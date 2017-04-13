@@ -6,4 +6,5 @@ import com.abc.test.domain.WxAccount;
 
 public interface WxAccountRepository extends JpaRepository<WxAccount, String> {
 
+	WxAccount findByUin(Integer uin);
 }

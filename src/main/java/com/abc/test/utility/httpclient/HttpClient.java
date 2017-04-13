@@ -25,7 +25,9 @@ import lombok.extern.log4j.Log4j;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
+import com.abc.test.utility.DateUtil;
 import com.abc.test.utility.JsonUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -193,7 +195,15 @@ public class HttpClient implements Closeable {
 	}
 	
 	public JSONObject getResponseByJsonObject() {
-		return JSON.parseObject(getResponseByString());
+		String s = getResponseByString();
+		String path = String.format("d://test/wx/%s_%s.txt", StringUtils.substringAfterLast(this.url, "/"), DateUtil.seconds());
+		try {
+			FileUtils.writeStringToFile(new File(path), s, "UTF-8");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return JSON.parseObject(s);
 	}
 	
 	public Map<String, List<String>> getResponseHeaders() {

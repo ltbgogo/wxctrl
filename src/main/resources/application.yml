@@ -19,6 +19,17 @@ spring:
     freemarker:
         settings: 
             classic_compatible: true
+    jpa:
+        properties:
+            hibernate:
+                hbm2ddl.auto: update
+                show_sql: true
+                format_sql: true
+
+logging:
+    level:
+        org:
+            hibernate: INFO
 
 security:
     basic:

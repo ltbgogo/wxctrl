@@ -5,45 +5,69 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Proxy.Type;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.apache.commons.io.FileUtils;
 
+import com.abc.test.domain.User;
+import com.abc.test.repository.RepoFactory;
 import com.abc.test.utility.httpclient.CookieStore;
 import com.abc.test.utility.httpclient.HttpClientConfig;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+@Getter
+@Setter
 public class WxMeta {
 	
-	public String status = "ok"; //ok failure 
-	public String frontMsg;
+	private String ownerId;
+			
+	private String status = "ok"; //ok failure 
+	private String frontMsg;
 
-	public String base_uri;
-	public String redirect_uri;
-	public String webpush_url;
+	private String base_uri;
+	private String redirect_uri;
+	private String webpush_url;
 	
-	public String uuid;
+	private String uuid;
 	
-	public String skey;
-	public String synckeyStr;
-	public String wxsid;
-	public String wxuin;
-	public String pass_ticket;
-	public String deviceId = "e" + System.nanoTime();
+	private String skey;
+	private String synckeyStr;
+	private String wxsid;
+	private String wxuin;
+	private String pass_ticket;
+	private String deviceId = "e" + System.nanoTime();
 		
-	public JSONObject baseRequest;
-	public JSONObject syncKey;
-	public JSONObject user;
+	private JSONObject baseRequest;
+	private JSONObject syncKey;
+	private JSONObject user;
 	
-	public File dir_root = new File("d://test/wx");
-	public File file_qrCode = FileUtils.getFile(dir_root, "qrcode." + deviceId + ".jpg");
+	private File dir_root = new File("d://test/wx");
+	private File file_qrCode = FileUtils.getFile(dir_root, "qrcode." + deviceId + ".jpg");
 	
-	public HttpClientConfig httpClientConfig;
+	private HttpClientConfig httpClientConfig;
 	
 	// 微信联系人列表，可聊天的联系人列表
-	public JSONArray memberList;
-	public JSONArray contactList;
-	public JSONArray groupList;
+	private JSONArray memberList;
+	private JSONArray contactList;
+	private JSONArray groupList;
 	
+	public User getOwner() {
+		return RepoFactory.f.getUserRepo().findOne(this.getOwnerId());
+	}
+	
+	public void setSyncKey(JSONObject syncKey) {
+		this.syncKey = syncKey;
+		StringBuffer synckey = new StringBuffer();
+		JSONArray list = syncKey.getJSONArray("List");
+		for (int i = 0, len = list.size(); i < len; i++) {
+			JSONObject item = list.getJSONObject(i);
+			synckey.append("|" + item.getIntValue("Key") + "_" + item.getIntValue("Val"));
+		}
+		this.setSynckeyStr(synckey.substring(1));
+	}
+
 	public WxMeta() {
 		httpClientConfig = new HttpClientConfig();
 		httpClientConfig.getRequestHeaderMap().put("Host", "wx.qq.com");
