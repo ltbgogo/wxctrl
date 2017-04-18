@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -29,10 +30,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.abc.test.utility.DateUtil;
 import com.abc.test.utility.JsonUtil;
+import com.abc.test.wx.WxMsgListener;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-@Log4j
+@Log4j2
 @NoArgsConstructor
 public class HttpClient implements Closeable {
 	
