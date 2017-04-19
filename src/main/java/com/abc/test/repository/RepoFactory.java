@@ -13,6 +13,8 @@ public interface RepoFactory {
 
 	WxAccountRepository getWxAccountRepo();
 	UserRepository getUserRepo();
+	WxContactRepository getWxContactRepo();
+	WxMsgRepository getWxMsgRepo();
 	
 	RepoFactory f = (RepoFactory) Proxy.newProxyInstance(RepoFactory.class.getClassLoader(), new Class[] {RepoFactory.class}, new InvocationHandler() {
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

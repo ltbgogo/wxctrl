@@ -1,32 +1,62 @@
 package com.abc.test.wx;
 
 import java.io.File;
-import java.io.InputStream;
+import java.io.Serializable;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.Proxy.Type;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import static com.abc.test.repository.RepoFactory.f;
 
 import com.abc.test.utility.DateUtil;
 import com.abc.test.utility.JsonUtil;
 import com.abc.test.utility.RegexUtil;
+import com.abc.test.utility.httpclient.CookieStore;
 import com.abc.test.utility.httpclient.HttpClient;
+import com.abc.test.utility.httpclient.HttpClientConfig;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 @AllArgsConstructor
-@Log4j
-public class WxService {
+@Log4j2
+public class WxHttpClient implements Serializable {
 	
 	private WxMeta meta;
+
+	/**
+	 * 获取群
+	 */
+	public void batchGetContact(List<String> tmpUserNames) {
+		@Cleanup
+		HttpClient client = createHttpClient(meta.getBase_uri() + "/webwxbatchgetcontact");        
+        client.getQueryMap().put("pass_ticket", this.meta.getPass_ticket());
+        client.getQueryMap().put("type", "ex");
+        client.getQueryMap().put("r", System.currentTimeMillis());
+        client.getContentJSONObject().put("BaseRequest", this.meta.getBaseRequest());
+        client.getContentJSONObject().put("Count", tmpUserNames.size());
+        client.getContentJSONObject().put("List", new JSONArray());
+        for (String tmpUserName : tmpUserNames) {
+        	client.getContentJSONObject().getJSONArray("List").add(ArrayUtils.toMap(new String[][] {
+        			{"UserName", tmpUserName}, {"ChatRoomId", ""}
+        	}));
+        }
+        client.connect();
+        
+        meta.setGroupList(client.getResponseByJsonObject().getJSONArray("ContactList"));
+        System.out.println();
+	}
 
 	/**
 	 * 获取联系人
@@ -34,6 +64,7 @@ public class WxService {
 	public void getContact() {
 		@Cleanup
 		HttpClient client = createHttpClient(meta.getBase_uri() + "/webwxgetcontact");
+		client.getQueryMap().put("seq", 1);
 		client.getQueryMap().put("pass_ticket", meta.getPass_ticket());
 		client.getQueryMap().put("skey", meta.getSkey());
 		client.getQueryMap().put("r", DateUtil.seconds());
@@ -68,8 +99,19 @@ public class WxService {
 		meta.setMemberList(data.getJSONArray("MemberList"));
 	}
 	
-	private HttpClient createHttpClient(String url) {
-		return new HttpClient(url, meta.getHttpClientConfig());
+	/**
+	 * Http客户端
+	 */
+	private final HttpClientConfig httpClientConfig = new HttpClientConfig();
+	{
+		httpClientConfig.getRequestHeaderMap().put("Host", "wx.qq.com");
+		httpClientConfig.getRequestHeaderMap().put("Referer", "https://wx.qq.com/?&lang=zh_CN");
+		httpClientConfig.setCookieStore(new CookieStore());
+		httpClientConfig.setHttpProxy("proxy3.bj.petrochina:8080");
+		httpClientConfig.setEnableSNIExtension(false);
+	};
+	public HttpClient createHttpClient(String url) {
+		return new HttpClient(url, this.httpClientConfig);
 	}
 
 	/**
@@ -246,55 +288,6 @@ public class WxService {
 		System.out.println(data);
 		return new int[] {data.getIntValue("retcode"), data.getIntValue("selector")};
 	}
-
-	/**
-	 * 处理消息
-	 */
-	public void handleMsg(JSONObject data) {
-		System.out.println("*********************" + data);
-		if (data != null) {
-			for (JSONObject msg : JsonUtil.toJsonObjects(data.get("AddMsgList"))) {
-				int msgType = msg.getIntValue("MsgType");
-				String name = getUserRemarkName(msg.getString("FromUserName"));
-				String content = msg.getString("Content");
-
-				if (msgType == 51) {
-					log.info("成功截获微信初始化消息");
-				} else if (msgType == 1) {
-					if (WxConst.FILTER_USERS.contains(msg.getString("ToUserName"))) {
-						continue;
-					} else if (msg.getString("FromUserName").equals(meta.getUser().getString("UserName"))) {
-						continue;
-					} else if (msg.getString("ToUserName").indexOf("@@") != -1) {
-						String[] peopleContent = content.split(":<br/>");
-						log.info("|" + name + "| " + peopleContent[0] + ":\n" + peopleContent[1].replace("<br/>", "\n"));
-					} else {
-						log.info(name + ": " + content);
-//						String ans = robot.talk(content);
-//						webwxsendmsg(wechatMeta, ans, msg.getString("FromUserName"));
-//						log.info("自动回复 " + ans);
-					}
-				} else if (msgType == 3) {
-					String msgId = msg.getString("MsgId");
-					@Cleanup
-					HttpClient c = createHttpClient(meta.getBase_uri() + "/webwxgetmsgimg");
-					c.getQueryMap().put("MsgID", msgId);
-					c.getQueryMap().put("skey", meta.getSkey());
-					c.getQueryMap().put("type", "slave");
-					c.connect();
-					File imagePath = FileUtils.getFile(meta.getDir_root(), "image", msgId + ".jpg");
-					imagePath.getParentFile().mkdirs();
-					log.info(imagePath);
-//					webwxsendmsg(wechatMeta, "二蛋还不支持图片呢", msg.getString("FromUserName"));
-				} else if (msgType == 34) {
-//					webwxsendmsg(wechatMeta, "二蛋还不支持语音呢", msg.getString("FromUserName"));
-				} else if (msgType == 42) {
-					log.info(name + " 给你发送了一张名片:");
-					log.info("=========================");
-				}
-			}
-		}
-	}
 	
 	/**
 	 * 发送消息
@@ -318,21 +311,6 @@ public class WxService {
 		c.connect();
 		
 		log.info("发送消息...");
-	}
-	
-	private String getUserRemarkName(String id) {
-		String name = "这个人物名字未知";
-		for (JSONObject member : JsonUtil.toJsonObjects(meta.getMemberList())) {
-			if (member.getString("UserName").equals(id)) {
-				if (StringUtils.isNotBlank(member.getString("RemarkName"))) {
-					name = member.getString("RemarkName");
-				} else {
-					name = member.getString("NickName");
-				}
-				return name;
-			}
-		}
-		return name;
 	}
 	
 	public JSONObject webwxsync(){

@@ -13,10 +13,11 @@ import com.abc.test.wx.WxMeta;
 public class WxPersistenceService {
 
 	public WxAccount saveWxAccount(WxMeta meta) {
-		WxAccount wxAccount = f.getWxAccountRepo().findByUin(meta.getUser().getIntValue("Uin"));
+		String uin = meta.getUser().getString("Uin");
+		WxAccount wxAccount = f.getWxAccountRepo().findByUin(uin);
 		if (wxAccount == null) {
 			wxAccount = new WxAccount();
-			wxAccount.setUin(meta.getUser().getIntValue("Uin"));
+			wxAccount.setUin(uin);
 			wxAccount.setOwner(meta.getOwner());
 			wxAccount.setNickName(meta.getUser().getString("NickName"));
 		}
@@ -24,4 +25,16 @@ public class WxPersistenceService {
 		return f.getWxAccountRepo().save(wxAccount);
 	}
 	
+	
 }
+
+
+
+
+
+
+
+
+
+
+

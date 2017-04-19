@@ -7,6 +7,14 @@ import com.abc.test.utility.spec.InOutProcessor;
 
 public class StringUtil {
 	
+	public static String lowerAlpha(String s) {
+		return s.substring(0, 1).toLowerCase() + s.substring(1);
+	}
+	
+	public static String upperAlpha(String s) {
+		return s.substring(0, 1).toUpperCase() + s.substring(1);
+	}
+	
 	public static String escapeHtml(String html) {
 		return html.replace("&lt;", "<").replace("&gt;", ">");
 	}

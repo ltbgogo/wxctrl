@@ -1,12 +1,13 @@
 package com.abc.test.utility.httpclient;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
 
-public class CookieStore {
+public class CookieStore implements Serializable {
 
 	@Getter
 	private List<Cookie> cookies = new ArrayList<Cookie>();

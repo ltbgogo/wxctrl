@@ -33,11 +33,10 @@ public class WxController {
 	private UserRepository userRepo;
 	
 	@RequestMapping("add")
-	User add() {
-		User u = new User();
-		u.setId("xxxx");
-		u = userRepo.save(u);
-		return u;
+	Map add() {
+		Map<String, Long> map = new HashMap<>();
+		map.put("aa", 23432L);
+		return map;
 	}
 	
 	@RequestMapping("index")

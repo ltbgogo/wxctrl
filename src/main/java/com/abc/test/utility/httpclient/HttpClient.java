@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.net.Proxy.Type;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -21,7 +23,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.io.FileUtils;
@@ -30,7 +31,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.abc.test.utility.DateUtil;
 import com.abc.test.utility.JsonUtil;
-import com.abc.test.wx.WxMsgListener;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
@@ -43,7 +43,7 @@ public class HttpClient implements Closeable {
 		this.cookieStore = config.getCookieStore();
 		this.requestHeaderMap = config.getRequestHeaderMap();
 		this.enableSNIExtension = config.getEnableSNIExtension();
-		this.proxy = config.getProxy();
+		this.httpProxy = config.getHttpProxy();
 	}
 	
 	public HttpClient(String url) {
@@ -58,7 +58,7 @@ public class HttpClient implements Closeable {
 	@Setter
 	private Boolean enableSNIExtension;
 	@Setter
-	private Proxy proxy; //new Proxy(Type.HTTP, new InetSocketAddress("10.22.98.21", 8080));
+	private String httpProxy; //"10.22.98.21:8080"
 	@Setter
 	private String url;
 	@Setter
@@ -115,8 +115,11 @@ public class HttpClient implements Closeable {
 				System.setProperty("https.protocols", "TLSv1");
 			}
 			//代理设置
-			if (this.proxy != null) {
-				this.connection = (HttpURLConnection) url.openConnection(proxy);
+			if (StringUtils.isNotBlank(this.httpProxy)) {
+				this.connection = (HttpURLConnection) url.openConnection(
+						new Proxy(Type.HTTP, new InetSocketAddress(
+								this.httpProxy.split(":")[0], 
+								Integer.parseInt(this.httpProxy.split(":")[1]))));
 			} else {
 				this.connection = (HttpURLConnection) url.openConnection();
 			}
