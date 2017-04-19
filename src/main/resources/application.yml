@@ -9,6 +9,9 @@ appconfig:
           description: my description
 
 spring:
+    main:
+        #web_environment: false
+        #show_banner: false
     application:
         name: cruncher
     datasource:
@@ -20,16 +23,24 @@ spring:
         settings: 
             classic_compatible: true
     jpa:
+        #database: H2
+        #show-sql: true
+        hibernate:
+            #ddl-auto: create-drop
+            naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
         properties:
             hibernate:
                 hbm2ddl.auto: update
                 show_sql: true
                 format_sql: true
+                #To enable load time / runtime weaving with Hibernate JPA and Spring Framework
+                ejb.use_class_enhancer: true
 
 logging:
+    file: log.txt
     level:
-        org:
-            hibernate: INFO
+        #org.hibernate: INFO
+        #org.springframework.web: DEBUG
 
 security:
     basic:
