@@ -31,6 +31,8 @@ public class WxController {
 	private WxAccountRepository wxAccountRepo;
 	@Autowired
 	private UserRepository userRepo;
+	@Autowired
+	private WxApp wxApp;
 	
 	@RequestMapping("add")
 	Map add() {
@@ -51,7 +53,7 @@ public class WxController {
     @RequestMapping("createClient")
     ReturnVO createClient() throws IOException {
 		//元数据
-    	WxMeta meta = WxApp.start();
+    	WxMeta meta = this.wxApp.startOne();
 		metaStorage.put(meta.getDeviceId(), meta);
 		
 		return ReturnVO.succeed(meta.getDeviceId());

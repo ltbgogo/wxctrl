@@ -1,6 +1,8 @@
 package com.abc.test;
 
 
+import javax.smartcardio.Card;
+
 import lombok.SneakyThrows;
 
 import org.springframework.boot.SpringApplication;
@@ -8,7 +10,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.abc.test.repository.RepoFactory;
+import com.abc.test.domain.WxAccount;
+import com.abc.test.repository.WxAccountRepository;
 import com.abc.test.utility.SpringManager;
 
 @Service
@@ -26,7 +29,14 @@ public class Test {
 	
 	@Transactional()
 	public void test() {
-	    RepoFactory.f.getWxAccountRepo().findOne("2").getMetaSerial().getId();
+		WxAccountRepository r = SpringManager.getBean(WxAccountRepository.class);
+		{
+			WxAccount w = r.findOne("2");
+			w.getMeta();
+		}
+		{
+			
+		}
 	}
 }
 

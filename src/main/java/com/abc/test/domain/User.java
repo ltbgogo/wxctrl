@@ -25,7 +25,7 @@ public class User {
 	 * 拥有的微信账号
 	 */
 	@OneToMany(mappedBy = "owner")
-	private List<WxAccount> followers = new ArrayList<>();
+	private List<WxAccount> wxAccounts = new ArrayList<>();
 }
 
 

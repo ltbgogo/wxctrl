@@ -26,6 +26,7 @@ public class WxMeta implements Serializable {
 	
 	private final WxHttpClient httpClient = new WxHttpClient(this);
 	private final WxMsgHandler msgHandler = new WxMsgHandler(this);
+	private final WxMsgListener msgListener = new WxMsgListener(this);
 	
 	private String ownerId;
 	

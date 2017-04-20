@@ -33,14 +33,20 @@ import com.abc.test.wx.WxMeta;
 
 import lombok.Cleanup;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.SneakyThrows;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "t_wx_meta_serial")
 @Entity
 public class WxMetaSerial {
+	
+	public WxMetaSerial(WxMeta meta) {
+		this.setMeta(meta);
+	}
 
 	@Id
 	@GeneratedValue

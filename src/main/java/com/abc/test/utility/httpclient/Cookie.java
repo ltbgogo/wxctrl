@@ -1,5 +1,6 @@
 package com.abc.test.utility.httpclient;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
@@ -11,7 +12,7 @@ import com.abc.test.utility.DateUtil;
 import com.abc.test.utility.StringUtil;
 
 @Data
-public class Cookie {
+public class Cookie implements Serializable {
 
 	@SneakyThrows
 	public Cookie(String cookieStr) {

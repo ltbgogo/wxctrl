@@ -73,34 +73,32 @@ public class WxAccount {
 	@Column(name = "last_logout_date")
     @Temporal(TemporalType.TIMESTAMP)
 	private Date lastLogoutDate;
+	/**
+	 * 登录的cookie信息
+	 */
+	@Column(name = "meta_serial")
+	@Basic(fetch = FetchType.LAZY)
+	@Lob
+	private byte[] metaSerial;
+
+	@SneakyThrows
+	public void setMeta(WxMeta meta) {
+		//序列化对象
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(byteArrayOutputStream);
+		oos.writeObject(meta);    //写入customer对象
+		this.setMetaSerial(byteArrayOutputStream.toByteArray());
+	}
 	
-//	/**
-//	 * 登录的cookie信息
-//	 */
-//	@Column(name = "meta_serial")
-//	@Basic(fetch = FetchType.LAZY)
-//	@Lob
-//	private byte[] metaSerial;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "meta_serial_id")
-	private WxMetaSerial metaSerial;
-	
-//	@SneakyThrows
-//	public void setMeta(WxMeta meta) {
-//		//序列化对象
-//		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//		ObjectOutputStream oos = new ObjectOutputStream(byteArrayOutputStream);
-//		oos.writeObject(meta);    //写入customer对象
-//		this.setMetaSerial(byteArrayOutputStream.toByteArray());
-//	}
-//	
-//	@SneakyThrows
-//	public WxMeta getMeta() {
-//		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(this.getMetaSerial()));
-//		return (WxMeta) ois.readObject();
-//	}
-	
+	@SneakyThrows
+	public WxMeta getMeta() {
+		if (this.getMetaSerial() != null) {
+			ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(this.getMetaSerial()));
+			return (WxMeta) ois.readObject();	
+		} else {
+			return null;
+		}
+	}
 }
 
 
