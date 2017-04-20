@@ -34,6 +34,8 @@ spring:
                 show_sql: true
                 #use_sql_comments: true
                 format_sql: true
+                #To enable load time / runtime weaving with Hibernate JPA and Spring Framework
+                #ejb.use_class_enhancer: true
 
 logging:
     file: log.txt
