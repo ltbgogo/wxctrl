@@ -29,7 +29,7 @@ public class BeanTest {
 		WxAccount account = new WxAccount();
 		account.setId("1");
 		account.setNickName("bz");
-		account.setUin(1);
+//		account.setUin(1);
 		this.wxAccountRepo.save(account);
 //		this.wxAccountRepo.findAll();
 		System.out.println("*********************");

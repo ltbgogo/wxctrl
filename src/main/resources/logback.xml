@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>    
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    
+    <logger name="org.springframework.web" level="DEBUG"/>
+    <!-- Hibernate 显示参数 -->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+<!--     <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="TRACE"/> -->
+    <!-- Hibernate 查看查询中命名参数的值 -->
+    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG"/>
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>
+</configuration>

@@ -1,5 +1,7 @@
 package com.abc.test.repository;
 
+import java.io.IOException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.abc.test.domain.WxAccount;
+import com.abc.test.wx.WxApp;
+import com.abc.test.wx.WxMeta;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -25,12 +29,7 @@ public class RepositoryTest {
 
 	@Test
 	public void findByUsernameShouldReturnUser() throws Exception {
-//		userRepo.findAll();
-//		WxAccount account = new WxAccount();
-//		account.setId("1");
-//		account.setNickName("bz");
-//		account.setUin(1);
-//		this.wxAccountRepo.save(account);
-		System.out.println("*****************" + this.wxAccountRepo.findAll().size());
+		WxMeta meta = WxApp.start();
+		Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start " + meta.getFile_qrCode()});
 	}
 }

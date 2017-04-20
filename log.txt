@@ -1,0 +1,522 @@
+2017-04-20 11:24:35.838  INFO 12532 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 12532 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:24:35.842  INFO 12532 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:24:35.930  INFO 12532 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@f8c1de5: startup date [Thu Apr 20 11:24:35 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:24:38.929  INFO 12532 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:24:38.949  INFO 12532 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:24:39.039  INFO 12532 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:24:39.040  INFO 12532 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:24:39.042  INFO 12532 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:24:39.095  INFO 12532 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:24:39.189  WARN 12532 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:24:39.282  INFO 12532 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:24:39.974  INFO 12532 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:24:40.089  INFO 12532 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:24:40.130  INFO 12532 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:24:40.181  INFO 12532 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:24:40.306  INFO 12532 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:24:40.354  INFO 12532 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:24:40.839  INFO 12532 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:24:40.861  INFO 12532 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:24:40.991  INFO 12532 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:24:41.179  INFO 12532 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:24:41.248  INFO 12532 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:24:41.250  INFO 12532 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:24:42.633  INFO 12532 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:24:42.737  INFO 12532 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:24:42.829  INFO 12532 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.627 seconds (JVM running for 8.379)
+2017-04-20 11:24:42.936 TRACE 12532 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:24:42.958 TRACE 12532 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:24:42.962 TRACE 12532 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:24:42.968 TRACE 12532 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [1]
+2017-04-20 11:24:43.615  INFO 12532 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@f8c1de5: startup date [Thu Apr 20 11:24:35 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:24:43.619  INFO 12532 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:24:43.620  INFO 12532 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:25:37.033  INFO 8176 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 8176 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:25:37.037  INFO 8176 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:25:37.115  INFO 8176 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@3b59e39b: startup date [Thu Apr 20 11:25:37 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:25:39.832  INFO 8176 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:25:39.853  INFO 8176 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:25:39.949  INFO 8176 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:25:39.951  INFO 8176 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:25:39.953  INFO 8176 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:25:40.006  INFO 8176 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:25:40.106  WARN 8176 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:25:40.201  INFO 8176 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:25:40.903  INFO 8176 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:25:41.032  INFO 8176 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:25:41.074  INFO 8176 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:25:41.127  INFO 8176 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:25:41.253  INFO 8176 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:25:41.298  INFO 8176 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:25:41.755  INFO 8176 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:25:41.783  INFO 8176 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:25:41.910  INFO 8176 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:25:42.097  INFO 8176 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:25:42.172  INFO 8176 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:25:42.174  INFO 8176 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 2 ms.
+2017-04-20 11:25:43.557  INFO 8176 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:25:43.645  INFO 8176 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:25:43.729  INFO 8176 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.22 seconds (JVM running for 7.981)
+2017-04-20 11:25:43.824 TRACE 8176 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:25:43.845 TRACE 8176 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:25:43.849 TRACE 8176 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:25:43.855 TRACE 8176 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [1]
+2017-04-20 11:25:44.594  INFO 8176 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@3b59e39b: startup date [Thu Apr 20 11:25:37 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:25:44.596  INFO 8176 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:25:44.597  INFO 8176 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:26:53.263  INFO 5584 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 5584 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:26:53.267  INFO 5584 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:26:53.349  INFO 5584 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@4d3e8e8a: startup date [Thu Apr 20 11:26:53 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:26:56.251  INFO 5584 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:26:56.272  INFO 5584 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:26:56.367  INFO 5584 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:26:56.369  INFO 5584 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:26:56.370  INFO 5584 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:26:56.438  INFO 5584 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:26:56.549  WARN 5584 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:26:56.647  INFO 5584 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:26:57.293  INFO 5584 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:26:57.410  INFO 5584 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:26:57.444  INFO 5584 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:26:57.499  INFO 5584 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:26:57.623  INFO 5584 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:26:57.672  INFO 5584 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:26:58.172  INFO 5584 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:26:58.199  INFO 5584 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:26:58.331  INFO 5584 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:26:58.528  INFO 5584 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:26:58.602  INFO 5584 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:26:58.603  INFO 5584 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:27:00.027  INFO 5584 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:27:00.201  INFO 5584 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:27:00.280  INFO 5584 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.573 seconds (JVM running for 8.315)
+2017-04-20 11:27:00.382 TRACE 5584 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:27:00.398 TRACE 5584 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:27:00.401 TRACE 5584 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:27:00.406 TRACE 5584 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [1]
+2017-04-20 11:27:00.983  INFO 5584 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@4d3e8e8a: startup date [Thu Apr 20 11:26:53 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:27:00.985  INFO 5584 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:27:00.987  INFO 5584 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:28:07.529  INFO 6500 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 6500 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:28:07.533  INFO 6500 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:28:07.615  INFO 6500 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@579613a1: startup date [Thu Apr 20 11:28:07 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:28:10.565  INFO 6500 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:28:10.586  INFO 6500 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:28:10.684  INFO 6500 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:28:10.686  INFO 6500 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:28:10.688  INFO 6500 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:28:10.738  INFO 6500 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:28:10.844  WARN 6500 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:28:10.939  INFO 6500 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:28:11.615  INFO 6500 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:28:11.725  INFO 6500 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:28:11.764  INFO 6500 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:28:11.830  INFO 6500 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:28:11.960  INFO 6500 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:28:11.995  INFO 6500 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:28:12.479  INFO 6500 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:28:12.511  INFO 6500 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:28:12.651  INFO 6500 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:28:12.846  INFO 6500 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:28:12.915  INFO 6500 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:28:12.917  INFO 6500 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:28:14.244  INFO 6500 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:28:14.352  INFO 6500 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:28:14.426  INFO 6500 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.426 seconds (JVM running for 8.25)
+2017-04-20 11:28:14.510 TRACE 6500 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:28:14.531 TRACE 6500 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:28:14.535 TRACE 6500 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:28:14.542 TRACE 6500 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [1]
+2017-04-20 11:28:15.276  INFO 6500 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@579613a1: startup date [Thu Apr 20 11:28:07 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:28:15.279  INFO 6500 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:28:15.280  INFO 6500 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:30:09.785  INFO 8976 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 8976 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:30:09.791  INFO 8976 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:30:09.886  INFO 8976 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@154575ea: startup date [Thu Apr 20 11:30:09 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:30:13.205  INFO 8976 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:30:13.227  INFO 8976 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:30:13.344  INFO 8976 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:30:13.346  INFO 8976 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:30:13.347  INFO 8976 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:30:13.413  INFO 8976 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:30:13.540  WARN 8976 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:30:13.663  INFO 8976 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:30:14.384  INFO 8976 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:30:14.509  INFO 8976 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:30:14.543  INFO 8976 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:30:14.609  INFO 8976 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:30:14.736  INFO 8976 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:30:14.775  INFO 8976 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:30:15.270  INFO 8976 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:30:15.297  INFO 8976 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:30:15.440  INFO 8976 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:30:15.640  INFO 8976 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:30:15.818  INFO 8976 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:30:15.820  INFO 8976 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:30:17.262  INFO 8976 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:30:17.385  INFO 8976 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:30:17.453  INFO 8976 --- [restartedMain] com.abc.test.Test                        : Started Test in 8.257 seconds (JVM running for 9.199)
+2017-04-20 11:30:26.599 TRACE 8976 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:30:26.669 TRACE 8976 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:30:26.681 TRACE 8976 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:30:26.698 TRACE 8976 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [1]
+2017-04-20 11:31:15.858  INFO 11556 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 11556 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:31:15.864  INFO 11556 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:31:15.952  INFO 11556 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1b332d94: startup date [Thu Apr 20 11:31:15 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:31:19.273  INFO 11556 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:31:19.296  INFO 11556 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:31:19.402  INFO 11556 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:31:19.404  INFO 11556 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:31:19.408  INFO 11556 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:31:19.463  INFO 11556 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:31:19.576  WARN 11556 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:31:19.688  INFO 11556 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:31:20.524  INFO 11556 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:31:20.640  INFO 11556 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:31:20.677  INFO 11556 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:31:20.731  INFO 11556 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:31:20.852  INFO 11556 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:31:20.897  INFO 11556 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:31:21.382  INFO 11556 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:31:21.406  INFO 11556 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:31:21.550  INFO 11556 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:31:21.800  INFO 11556 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:31:21.885  INFO 11556 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:31:21.886  INFO 11556 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:31:23.315  INFO 11556 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:31:23.473  INFO 11556 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:31:23.629  INFO 11556 --- [restartedMain] com.abc.test.Test                        : Started Test in 8.372 seconds (JVM running for 9.133)
+2017-04-20 11:31:23.742 TRACE 11556 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:31:23.754 TRACE 11556 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:31:23.757 TRACE 11556 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:31:23.762 TRACE 11556 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [1]
+2017-04-20 11:31:23.781  INFO 11556 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@1b332d94: startup date [Thu Apr 20 11:31:15 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:31:23.783  INFO 11556 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:31:23.784  INFO 11556 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:32:51.642  INFO 7312 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 7312 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:32:51.648  INFO 7312 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:32:51.724  INFO 7312 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@46cb560b: startup date [Thu Apr 20 11:32:51 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:32:54.522  INFO 7312 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:32:54.547  INFO 7312 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:32:54.660  INFO 7312 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:32:54.662  INFO 7312 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:32:54.663  INFO 7312 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:32:54.718  INFO 7312 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:32:54.816  WARN 7312 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:32:54.909  INFO 7312 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:32:55.587  INFO 7312 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:32:55.698  INFO 7312 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:32:55.733  INFO 7312 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:32:55.782  INFO 7312 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:32:55.901  INFO 7312 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:32:55.948  INFO 7312 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:32:56.529  INFO 7312 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:32:56.553  INFO 7312 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:32:56.682  INFO 7312 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:32:56.877  INFO 7312 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:32:56.949  INFO 7312 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:32:56.951  INFO 7312 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:32:58.245  INFO 7312 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:32:58.354  INFO 7312 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:32:58.432  INFO 7312 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.31 seconds (JVM running for 8.074)
+2017-04-20 11:32:58.580  INFO 7312 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@46cb560b: startup date [Thu Apr 20 11:32:51 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:32:58.582  INFO 7312 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:32:58.585  INFO 7312 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:33:17.983  INFO 7924 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 7924 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:33:17.987  INFO 7924 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:33:18.069  INFO 7924 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@7f8f8577: startup date [Thu Apr 20 11:33:18 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:33:20.991  INFO 7924 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:33:21.011  INFO 7924 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:33:21.111  INFO 7924 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:33:21.113  INFO 7924 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:33:21.115  INFO 7924 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:33:21.169  INFO 7924 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:33:21.270  WARN 7924 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:33:21.368  INFO 7924 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:33:22.068  INFO 7924 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:33:22.184  INFO 7924 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:33:22.219  INFO 7924 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:33:22.272  INFO 7924 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:33:22.395  INFO 7924 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:33:22.432  INFO 7924 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:33:22.910  INFO 7924 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:33:22.934  INFO 7924 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:33:23.069  INFO 7924 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:33:23.262  INFO 7924 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:33:23.337  INFO 7924 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:33:23.339  INFO 7924 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:33:24.631  INFO 7924 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:33:24.745  INFO 7924 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:33:24.816  INFO 7924 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.376 seconds (JVM running for 8.189)
+2017-04-20 11:33:24.971  INFO 7924 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@7f8f8577: startup date [Thu Apr 20 11:33:18 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:33:24.975  INFO 7924 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:33:24.978  INFO 7924 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:35:56.910  INFO 14020 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 14020 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:35:56.915  INFO 14020 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:35:57.026  INFO 14020 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@531de17f: startup date [Thu Apr 20 11:35:57 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:36:00.513  INFO 14020 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:36:00.535  INFO 14020 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:36:00.638  INFO 14020 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:36:00.639  INFO 14020 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:36:00.641  INFO 14020 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:36:00.704  INFO 14020 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:36:00.824  WARN 14020 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:36:00.940  INFO 14020 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:36:01.645  INFO 14020 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:36:01.763  INFO 14020 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:36:01.805  INFO 14020 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:36:01.867  INFO 14020 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:36:02.004  INFO 14020 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:36:02.055  INFO 14020 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:36:02.564  INFO 14020 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:36:02.592  INFO 14020 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:36:02.732  INFO 14020 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:36:02.932  INFO 14020 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:36:03.007  INFO 14020 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:36:03.009  INFO 14020 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 2 ms.
+2017-04-20 11:36:04.429  INFO 14020 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:36:04.554  INFO 14020 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:36:04.643  INFO 14020 --- [restartedMain] com.abc.test.Test                        : Started Test in 8.408 seconds (JVM running for 9.328)
+2017-04-20 11:36:04.770  INFO 14020 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@531de17f: startup date [Thu Apr 20 11:35:57 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:36:04.773  INFO 14020 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:36:04.776  INFO 14020 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:36:35.357  INFO 8752 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 8752 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:36:35.363  INFO 8752 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:36:35.454  INFO 8752 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@797ff11f: startup date [Thu Apr 20 11:36:35 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:36:38.541  INFO 8752 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:36:38.563  INFO 8752 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:36:38.685  INFO 8752 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:36:38.687  INFO 8752 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:36:38.689  INFO 8752 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:36:38.750  INFO 8752 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:36:38.983  INFO 8752 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:36:40.347  INFO 8752 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:36:40.549  INFO 8752 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:36:40.631  INFO 8752 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:36:40.632  INFO 8752 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:36:42.077  INFO 8752 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:36:42.261  INFO 8752 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:36:42.355  INFO 8752 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.66 seconds (JVM running for 8.523)
+2017-04-20 11:36:42.452  INFO 8752 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@797ff11f: startup date [Thu Apr 20 11:36:35 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:36:42.455  INFO 8752 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:36:42.458  INFO 8752 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:37:12.587  INFO 8268 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 8268 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:37:12.593  INFO 8268 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:37:12.687  INFO 8268 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5b3dbee4: startup date [Thu Apr 20 11:37:12 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:37:15.946  INFO 8268 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:37:15.971  INFO 8268 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:37:16.078  INFO 8268 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:37:16.079  INFO 8268 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:37:16.081  INFO 8268 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:37:16.140  INFO 8268 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:37:16.364  INFO 8268 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:37:17.731  INFO 8268 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:37:17.923  INFO 8268 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:37:18.014  INFO 8268 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:37:18.016  INFO 8268 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:37:19.411  INFO 8268 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:37:19.598  INFO 8268 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:37:19.691  INFO 8268 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.697 seconds (JVM running for 8.565)
+2017-04-20 11:37:19.797  INFO 8268 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5b3dbee4: startup date [Thu Apr 20 11:37:12 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:37:19.800  INFO 8268 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:37:19.803  INFO 8268 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:37:40.187  INFO 14256 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 14256 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:37:40.194  INFO 14256 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:37:40.284  INFO 14256 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1f939fd3: startup date [Thu Apr 20 11:37:40 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:37:43.491  INFO 14256 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:37:43.519  INFO 14256 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:37:43.627  INFO 14256 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:37:43.630  INFO 14256 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:37:43.632  INFO 14256 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:37:43.691  INFO 14256 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:37:43.818  WARN 14256 --- [restartedMain] .h.j.b.i.EntityManagerFactoryBuilderImpl : HHH015017: 'hibernate.ejb.use_class_enhancer' property is deprecated. Use 'hibernate.enhance.enable[...]' properties instead to enable each individual feature.
+2017-04-20 11:37:43.958  INFO 14256 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:37:44.677  INFO 14256 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.User] as Entity
+2017-04-20 11:37:44.800  INFO 14256 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMetaSerial] as Entity
+2017-04-20 11:37:44.837  INFO 14256 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxAccount] as Entity
+2017-04-20 11:37:44.890  INFO 14256 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxContact] as Entity
+2017-04-20 11:37:45.036  INFO 14256 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.AppLog] as Entity
+2017-04-20 11:37:45.088  INFO 14256 --- [restartedMain] o.h.bytecode.enhance.spi.Enhancer        : Enhancing [com.abc.test.domain.WxMsg] as Entity
+2017-04-20 11:37:45.590  INFO 14256 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.User
+2017-04-20 11:37:45.619  INFO 14256 --- [restartedMain] o.h.tuple.entity.EntityMetamodel         : HHH000157: Lazy property fetching available for: com.abc.test.domain.WxMetaSerial
+2017-04-20 11:37:45.759  INFO 14256 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:37:45.957  INFO 14256 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:37:46.048  INFO 14256 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:37:46.050  INFO 14256 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 2 ms.
+2017-04-20 11:37:47.611  INFO 14256 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:37:47.730  INFO 14256 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:37:47.823  INFO 14256 --- [restartedMain] com.abc.test.Test                        : Started Test in 8.247 seconds (JVM running for 9.096)
+2017-04-20 11:37:47.944  INFO 14256 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@1f939fd3: startup date [Thu Apr 20 11:37:40 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:37:47.949  INFO 14256 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:37:47.951  INFO 14256 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:38:10.385  INFO 12004 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 12004 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:38:10.390  INFO 12004 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:38:10.488  INFO 12004 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@51f6c99: startup date [Thu Apr 20 11:38:10 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:38:13.655  INFO 12004 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:38:13.677  INFO 12004 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:38:13.857  INFO 12004 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:38:13.863  INFO 12004 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:38:13.867  INFO 12004 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:38:13.972  INFO 12004 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:38:14.200  INFO 12004 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:38:15.510  INFO 12004 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:38:15.717  INFO 12004 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:38:15.814  INFO 12004 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:38:15.815  INFO 12004 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:38:17.215  INFO 12004 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:38:17.401  INFO 12004 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:38:17.506  INFO 12004 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.727 seconds (JVM running for 8.591)
+2017-04-20 11:38:17.607  INFO 12004 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@51f6c99: startup date [Thu Apr 20 11:38:10 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:38:17.612  INFO 12004 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:38:17.614  INFO 12004 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:38:35.703  INFO 13976 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 13976 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:38:35.706  INFO 13976 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:38:35.788  INFO 13976 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@4d3e8e8a: startup date [Thu Apr 20 11:38:35 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:38:38.933  INFO 13976 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:38:38.958  INFO 13976 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:38:39.063  INFO 13976 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:38:39.065  INFO 13976 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:38:39.067  INFO 13976 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:38:39.125  INFO 13976 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:38:39.355  INFO 13976 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:38:40.669  INFO 13976 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:38:40.865  INFO 13976 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:38:40.944  INFO 13976 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:38:40.946  INFO 13976 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:38:42.328  INFO 13976 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:38:42.531  INFO 13976 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:38:42.626  INFO 13976 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.545 seconds (JVM running for 8.436)
+2017-04-20 11:38:42.688 TRACE 13976 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:38:42.707 TRACE 13976 --- [restartedMain] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([last_log2_2_0_] : [TIMESTAMP]) - [null]
+2017-04-20 11:38:42.708 TRACE 13976 --- [restartedMain] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([last_log3_2_0_] : [TIMESTAMP]) - [null]
+2017-04-20 11:38:42.709 TRACE 13976 --- [restartedMain] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([meta_ser6_2_0_] : [VARCHAR]) - [6]
+2017-04-20 11:38:42.710 TRACE 13976 --- [restartedMain] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([nick_nam4_2_0_] : [VARCHAR]) - [null]
+2017-04-20 11:38:42.710 TRACE 13976 --- [restartedMain] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([owner_id7_2_0_] : [VARCHAR]) - [1]
+2017-04-20 11:38:42.711 TRACE 13976 --- [restartedMain] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([uin5_2_0_] : [VARCHAR]) - [null]
+2017-04-20 11:38:42.756  INFO 13976 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@4d3e8e8a: startup date [Thu Apr 20 11:38:35 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:38:42.759  INFO 13976 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:38:42.762  INFO 13976 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:39:34.935  INFO 12816 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 12816 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:39:34.940  INFO 12816 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:39:35.031  INFO 12816 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@60cf4da0: startup date [Thu Apr 20 11:39:35 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:39:38.125  INFO 12816 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:39:38.147  INFO 12816 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:39:38.256  INFO 12816 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:39:38.257  INFO 12816 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:39:38.259  INFO 12816 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:39:38.320  INFO 12816 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:39:38.544  INFO 12816 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:39:39.860  INFO 12816 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:39:40.055  INFO 12816 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:39:40.130  INFO 12816 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:39:40.131  INFO 12816 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:39:41.516  INFO 12816 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:39:41.685  INFO 12816 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:39:41.785  INFO 12816 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.448 seconds (JVM running for 8.286)
+2017-04-20 11:39:41.837 TRACE 12816 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:39:41.890  INFO 12816 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@60cf4da0: startup date [Thu Apr 20 11:39:35 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:39:41.893  INFO 12816 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:39:41.894  INFO 12816 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:39:59.329  INFO 11976 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 11976 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:39:59.332  INFO 11976 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:39:59.421  INFO 11976 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@49d44a2: startup date [Thu Apr 20 11:39:59 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:40:02.735  INFO 11976 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:40:02.760  INFO 11976 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:40:02.871  INFO 11976 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:40:02.872  INFO 11976 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:40:02.874  INFO 11976 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:40:02.934  INFO 11976 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:40:03.161  INFO 11976 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:40:04.494  INFO 11976 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:40:04.708  INFO 11976 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:40:04.795  INFO 11976 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:40:04.796  INFO 11976 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:40:06.220  INFO 11976 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:40:06.412  INFO 11976 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:40:06.511  INFO 11976 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.772 seconds (JVM running for 8.658)
+2017-04-20 11:40:06.576 TRACE 11976 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:40:06.608 TRACE 11976 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:40:06.622 TRACE 11976 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:40:06.636  INFO 11976 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@49d44a2: startup date [Thu Apr 20 11:39:59 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:40:06.638  INFO 11976 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:40:06.640  INFO 11976 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:41:12.609  INFO 13088 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 13088 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:41:12.613  INFO 13088 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:41:12.717  INFO 13088 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@bf38e9a: startup date [Thu Apr 20 11:41:12 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:41:15.977  INFO 13088 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:41:16.003  INFO 13088 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:41:16.115  INFO 13088 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:41:16.117  INFO 13088 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:41:16.119  INFO 13088 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:41:16.180  INFO 13088 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:41:16.444  INFO 13088 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:41:17.831  INFO 13088 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:41:18.041  INFO 13088 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:41:18.127  INFO 13088 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:41:18.128  INFO 13088 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 1 ms.
+2017-04-20 11:41:19.553  INFO 13088 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:41:19.727  INFO 13088 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:41:19.821  INFO 13088 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.805 seconds (JVM running for 8.701)
+2017-04-20 11:41:19.878 TRACE 13088 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:41:19.913 TRACE 13088 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:41:19.940  INFO 13088 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@bf38e9a: startup date [Thu Apr 20 11:41:12 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:41:19.944  INFO 13088 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:41:19.947  INFO 13088 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:43:22.307  INFO 7728 --- [restartedMain] com.abc.test.Test                        : Starting Test on USER-M8C2DITV5T with PID 7728 (E:\workspace\git\wxctrl\target\classes started by Administrator in E:\workspace\git\wxctrl)
+2017-04-20 11:43:22.311  INFO 7728 --- [restartedMain] com.abc.test.Test                        : No active profile set, falling back to default profiles: default
+2017-04-20 11:43:22.406  INFO 7728 --- [restartedMain] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@2b3b5229: startup date [Thu Apr 20 11:43:22 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:43:25.516  INFO 7728 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:43:25.540  INFO 7728 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-04-20 11:43:25.643  INFO 7728 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2017-04-20 11:43:25.645  INFO 7728 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-04-20 11:43:25.647  INFO 7728 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-04-20 11:43:25.709  INFO 7728 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-04-20 11:43:25.928  INFO 7728 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-04-20 11:43:27.241  INFO 7728 --- [restartedMain] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2017-04-20 11:43:27.465  INFO 7728 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-04-20 11:43:27.547  INFO 7728 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql]
+2017-04-20 11:43:27.549  INFO 7728 --- [restartedMain] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from URL [file:/E:/workspace/git/wxctrl/target/classes/data.sql] in 2 ms.
+2017-04-20 11:43:28.940  INFO 7728 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2017-04-20 11:43:29.102  INFO 7728 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-04-20 11:43:29.190  INFO 7728 --- [restartedMain] com.abc.test.Test                        : Started Test in 7.471 seconds (JVM running for 8.325)
+2017-04-20 11:43:29.250 TRACE 7728 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [2]
+2017-04-20 11:43:29.285 TRACE 7728 --- [restartedMain] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [6]
+2017-04-20 11:43:29.308  INFO 7728 --- [Thread-9] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@2b3b5229: startup date [Thu Apr 20 11:43:22 GMT+08:00 2017]; root of context hierarchy
+2017-04-20 11:43:29.311  INFO 7728 --- [Thread-9] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-04-20 11:43:29.313  INFO 7728 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
