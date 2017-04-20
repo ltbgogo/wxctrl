@@ -23,6 +23,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.SneakyThrows;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.io.FileUtils;
@@ -34,7 +36,7 @@ import com.abc.test.utility.JsonUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-@Log4j2
+@Log4j
 @NoArgsConstructor
 public class HttpClient implements Closeable {
 	

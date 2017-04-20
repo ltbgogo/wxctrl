@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.io.FileUtils;
@@ -30,7 +31,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 @AllArgsConstructor
-@Log4j2
+@Log4j
 public class WxHttpClient implements Serializable {
 	
 	private WxMeta meta;

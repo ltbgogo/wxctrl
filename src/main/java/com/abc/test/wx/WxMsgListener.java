@@ -8,7 +8,7 @@ import lombok.extern.log4j.Log4j2;
 
 import com.alibaba.fastjson.JSONObject;
 
-@Log4j2
+@Log4j
 public class WxMsgListener {
 	
 	int playWeChat = 0;

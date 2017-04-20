@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import org.apache.commons.io.output.TeeOutputStream;
-import org.apache.logging.log4j.core.appender.db.jdbc.JdbcAppender;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Primary;
@@ -23,7 +22,7 @@ import com.abc.test.service.WxPersistenceService;
 import com.abc.test.utility.SpringManager;
 import com.abc.test.utility.UserManager;
 
-@Log4j2
+@Log4j
 public class WxApp {
 	
 	@Primary

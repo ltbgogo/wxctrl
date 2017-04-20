@@ -9,9 +9,11 @@ import javax.servlet.ServletException;
 
 import lombok.SneakyThrows;
 
+import org.hibernate.annotations.OptimisticLocking;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableLoadTimeWeaving;
