@@ -14,6 +14,8 @@ import com.alibaba.fastjson.JSONObject;
 @Log4j
 public class WxMsgListener implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
 //	int playWeChat = 0;
 	private WxMeta meta;
 	
@@ -22,31 +24,29 @@ public class WxMsgListener implements Serializable {
 		log.info("进入消息监听模式 ...");
 		while(true) {
 			try {
-				int[] arr = meta.getHttpClient().syncCheck();
-				log.info(String.format("retcode=%s, selector=%s", arr[0], arr[1]));
-				
-				if(arr[0] == 1100){
+				JSONObject syncStatus = meta.getHttpClient().syncCheck();
+				if(syncStatus.getIntValue("retcode") == 1100){
 					log.info("你在手机上登出了微信，再见");
 					break;
-				}
-				if(arr[0] == 0) {
-					if(arr[1] == 2) {
+				}else if(syncStatus.getIntValue("retcode") == 0) {
+					if(syncStatus.getIntValue("selector") == 2) {
 						JSONObject data = meta.getHttpClient().webwxsync();
 						meta.getMsgHandler().handleMsg(data);
-					} else if(arr[1] == 6) {
+					} else if(syncStatus.getIntValue("selector") == 6) {
 						JSONObject data = meta.getHttpClient().webwxsync();
 						meta.getMsgHandler().handleMsg(data);
-					} else if(arr[1] == 7) {
+					} else if(syncStatus.getIntValue("selector") == 7) {
 //						playWeChat += 1;
 //						log.info(String.format("你在手机上玩微信被我发现了 %s 次", playWeChat));
 //						meta.getHttpClient().webwxsync();
-					} else if(arr[1] == 3) {
+					} else if(syncStatus.getIntValue("selector") == 3) {
 //								continue;
-					} else if(arr[1] == 0) {
+					} else if(syncStatus.getIntValue("selector") == 0) {
 //								continue;
 					}
-				} else {
-					// 
+				} else if (syncStatus.getInteger("retcode") == 1102) {
+					log.info("微信Cookie过期，请重新登录");
+					break;
 				}
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);

@@ -13,6 +13,8 @@ import com.abc.test.utility.StringUtil;
 
 @Data
 public class Cookie implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@SneakyThrows
 	public Cookie(String cookieStr) {

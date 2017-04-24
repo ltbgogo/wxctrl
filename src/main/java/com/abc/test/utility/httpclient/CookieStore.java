@@ -8,6 +8,8 @@ import java.util.List;
 import lombok.Getter;
 
 public class CookieStore implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Getter
 	private List<Cookie> cookies = new ArrayList<Cookie>();

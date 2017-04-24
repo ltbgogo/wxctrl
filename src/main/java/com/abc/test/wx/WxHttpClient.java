@@ -1,27 +1,23 @@
 package com.abc.test.wx;
 
-import java.io.File;
 import java.io.Serializable;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.Proxy.Type;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import static com.abc.test.repository.RepoFactory.f;
-
 import com.abc.test.utility.DateUtil;
-import com.abc.test.utility.JsonUtil;
 import com.abc.test.utility.RegexUtil;
 import com.abc.test.utility.httpclient.CookieStore;
 import com.abc.test.utility.httpclient.HttpClient;
@@ -30,16 +26,33 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Log4j
 public class WxHttpClient implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
+	public WxHttpClient(WxMeta meta) {
+		this.meta = meta;
+	}
+	
 	private WxMeta meta;
+	
+	private Map<String, JSONObject> grpDataCache = new HashMap<String, JSONObject>();
+	
+	public JSONObject getGrpInfo(String tmpGrpName) {
+		if (!grpDataCache.containsKey(tmpGrpName)) {
+			JSONObject data = batchGetContact(Arrays.asList(tmpGrpName));
+			JSONObject grpData = data.getJSONArray("ContactList").getJSONObject(0);
+			grpDataCache.put(tmpGrpName, grpData);
+		}
+		return grpDataCache.get(tmpGrpName);
+	}
 
 	/**
 	 * 获取群
 	 */
-	public void batchGetContact(List<String> tmpUserNames) {
+	public JSONObject batchGetContact(List<String> tmpUserNames) {
 		@Cleanup
 		HttpClient client = createHttpClient(meta.getBase_uri() + "/webwxbatchgetcontact");        
         client.getQueryMap().put("pass_ticket", this.meta.getPass_ticket());
@@ -54,9 +67,7 @@ public class WxHttpClient implements Serializable {
         	}));
         }
         client.connect();
-        
-        meta.setGroupList(client.getResponseByJsonObject().getJSONArray("ContactList"));
-        System.out.println();
+        return client.getResponseByJsonObject();
 	}
 
 	/**
@@ -254,8 +265,8 @@ public class WxHttpClient implements Serializable {
 		for(String syncUrl : WxConst.SYNC_HOST){
 			try {
 				meta.setWebpush_url("https://" + syncUrl + "/cgi-bin/mmwebwx-bin/synccheck");
-				int[] res = this.syncCheck();
-				if(res[0] == 0) {
+				JSONObject res = this.syncCheck();
+				if(res.getIntValue("retcode") == 0) {
 					log.info(String.format("选择线路：[%s]", syncUrl));
 					return;
 				}
@@ -269,7 +280,7 @@ public class WxHttpClient implements Serializable {
 	/**
 	 * 检测心跳
 	 */
-	public int[] syncCheck() {
+	public JSONObject syncCheck() {
 		@Cleanup
 		HttpClient c = createHttpClient(meta.getWebpush_url());
 		c.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
@@ -287,7 +298,8 @@ public class WxHttpClient implements Serializable {
 		////window.synccheck={retcode:"0",selector:"0"}
 		JSONObject data = this.parseWxSpec(c.getResponseByString()).getJSONObject("window.synccheck");
 		System.out.println(data);
-		return new int[] {data.getIntValue("retcode"), data.getIntValue("selector")};
+		//new int[] {data.getIntValue("retcode"), data.getIntValue("selector")};
+		return data;
 	}
 	
 	/**

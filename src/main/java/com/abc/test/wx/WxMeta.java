@@ -21,8 +21,8 @@ import com.alibaba.fastjson.JSONObject;
 @Getter
 @Setter
 public class WxMeta implements Serializable {
-
-	private static final long serialVersionUID = 6395820832432929037L;
+	
+	private static final long serialVersionUID = 1L;
 	
 	private final WxHttpClient httpClient = new WxHttpClient(this);
 	private final WxMsgHandler msgHandler = new WxMsgHandler(this);

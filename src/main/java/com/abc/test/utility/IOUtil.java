@@ -2,9 +2,14 @@ package com.abc.test.utility;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.Serializable;
+
+import org.apache.commons.io.output.TeeOutputStream;
 
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
@@ -15,12 +20,11 @@ import com.abc.test.wx.WxMeta;
 
 public class IOUtil {
 	
-	public static void main(String[] args) {
-		WxMeta a = new WxMeta();
-		a.setBase_uri("xxx");
-		byte[] d = serialize(a);
-		a = deserialize(d);
-		System.out.println(a.getBase_uri());
+	@SneakyThrows
+	public static void forkConsoleOut(String filePath) {
+		OutputStream out = new FileOutputStream(filePath, true);
+		TeeOutputStream teeOutputStream = new TeeOutputStream(System.out, out);
+		System.setOut( new PrintStream(teeOutputStream));
 	}
 
 	/**
@@ -46,12 +50,5 @@ public class IOUtil {
 		T o = (T) ois.readObject();
 		return o;
 	}
-}
-
-@AllArgsConstructor
-@Data
-class Person implements Serializable{
-    private String name;
-    private int age;
 }
 

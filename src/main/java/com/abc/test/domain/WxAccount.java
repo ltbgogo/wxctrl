@@ -80,14 +80,23 @@ public class WxAccount {
 	@Basic(fetch = FetchType.LAZY)
 	@Lob
 	private byte[] metaSerial;
+	/**
+	 * isActive
+	 */
+	@Column(name = "is_active")
+	private Boolean isActive;
 
 	@SneakyThrows
 	public void setMeta(WxMeta meta) {
-		//序列化对象
-		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		ObjectOutputStream oos = new ObjectOutputStream(byteArrayOutputStream);
-		oos.writeObject(meta);    //写入customer对象
-		this.setMetaSerial(byteArrayOutputStream.toByteArray());
+		if (meta == null) {
+			this.setMetaSerial(null);
+		} else {
+			//序列化对象
+			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(byteArrayOutputStream);
+			oos.writeObject(meta);    //写入customer对象
+			this.setMetaSerial(byteArrayOutputStream.toByteArray());	
+		}
 	}
 	
 	@SneakyThrows

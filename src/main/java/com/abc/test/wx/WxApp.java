@@ -29,8 +29,10 @@ import com.abc.test.domain.WxMetaSerial;
 import static com.abc.test.repository.RepoFactory.f;
 
 import com.abc.test.service.WxPersistenceService;
+import com.abc.test.utility.IOUtil;
 import com.abc.test.utility.SpringManager;
 import com.abc.test.utility.UserManager;
+import com.alibaba.fastjson.JSONObject;
 
 @Transactional
 @Service
@@ -38,14 +40,8 @@ import com.abc.test.utility.UserManager;
 public class WxApp {
 	
 	public static void main(String[] args) throws IOException {
-		OutputStream out = new FileOutputStream("d://test//out.txt", true);
-		TeeOutputStream teeOutputStream = new TeeOutputStream(System.out, out);
-		System.setOut( new PrintStream(teeOutputStream));
-		
-		SpringApplicationBuilder builder = new SpringApplicationBuilder(Application.class);
-		SpringApplication application = builder.build();
-		application.setWebEnvironment(false);
-		application.run(args);
+		IOUtil.forkConsoleOut("d://test//out.txt");
+		SpringManager.startMailApplication(Application.class, args);
 		
 		WxApp app = SpringManager.getBean(WxApp.class);
 		app.test();
@@ -54,17 +50,32 @@ public class WxApp {
 	@SneakyThrows
 	public void test() {
 		start(UserManager.getUser());
+		
 //		WxMeta meta = startOne();
 //		Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start " + meta.getFile_qrCode()});
 	}
 	
 	public void start(User user) {
 		for (WxAccount account : user.getWxAccounts()) {
-			WxMeta meta = account.getMeta(); 
+			final WxMeta meta = account.getMeta(); 
 			if (meta != null) {
 				try {
-					int[] i = meta.getHttpClient().syncCheck();	
-					meta.getMsgListener().start();
+					JSONObject syncStatus = meta.getHttpClient().syncCheck();	
+					if (syncStatus.getIntValue("retcode") == 1102 ||
+							syncStatus.getIntValue("retcode") == 1101) {
+						account.setMeta(null);
+						account.setIsActive(false);
+						f.getWxAccountRepo().save(account);
+					} else {
+						account.setIsActive(true);
+						f.getWxAccountRepo().save(account);
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								meta.getMsgListener().start();
+							}
+						}).start();
+					}
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);
 				}

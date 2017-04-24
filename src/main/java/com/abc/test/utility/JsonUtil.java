@@ -1,9 +1,14 @@
 package com.abc.test.utility;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
@@ -34,5 +39,14 @@ public class JsonUtil {
 	@SuppressWarnings("unchecked")
 	public static Map<String, Object> bean2Map(Object u) {
 		return parseJson(toJson(u), Map.class);
+	}
+	
+	public static JSONObject search(JSONArray jsonObjectArray, String jsonObjectKey, Object jsonObjectValue) {
+		for (JSONObject o : JsonUtil.toJsonObjects(jsonObjectArray)) {
+			if (jsonObjectValue.equals(o.getObject(jsonObjectKey, jsonObjectValue.getClass()))) {
+				return o;
+			}
+		}
+		return null;
 	}
 }
