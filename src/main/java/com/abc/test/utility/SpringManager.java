@@ -3,9 +3,13 @@ package com.abc.test.utility;
 import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.BeansException;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.orm.jpa.JpaTransactionManager;
+
+import com.abc.test.Application;
 
 public class SpringManager implements ApplicationContextAware {
 
@@ -33,5 +37,12 @@ public class SpringManager implements ApplicationContextAware {
 	
 	public static Object getBean(String name) {
 		return applicationContext.getBean(name);
+	}
+	
+	public static void startMailApplication(Class<?> applicationClass, String...args) {
+		SpringApplicationBuilder builder = new SpringApplicationBuilder(applicationClass);
+	    SpringApplication application = builder.build();
+	    application.setWebEnvironment(false);
+	    application.run(args);
 	}
 }

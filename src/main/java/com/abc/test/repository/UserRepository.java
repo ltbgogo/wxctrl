@@ -7,3 +7,4 @@ import com.abc.test.domain.User;
 public interface UserRepository extends JpaRepository<User, String> {
 
 }
+ 
