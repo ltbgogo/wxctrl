@@ -1,6 +1,9 @@
 package com.abc.test.wx;
 
+import static com.abc.test.repository.RepoFactory.f;
+
 import java.io.Serializable;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import lombok.AllArgsConstructor;
@@ -8,6 +11,7 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
+import com.abc.test.domain.WxAccount;
 import com.alibaba.fastjson.JSONObject;
 
 @AllArgsConstructor
@@ -21,6 +25,15 @@ public class WxMsgListener implements Serializable {
 	
 	@SneakyThrows
 	public void start(){
+		//记录登录信息
+		{
+			WxAccount account = meta.getWxAccount();
+			account.setLastLoginDate(new Date());
+			account.setMeta(meta);
+			account.setIsOnline(true);
+			f.getWxAccountRepo().save(account);
+		}
+		
 		log.info("进入消息监听模式 ...");
 		while(true) {
 			try {
@@ -49,6 +62,9 @@ public class WxMsgListener implements Serializable {
 					break;
 				}
 			} catch (Exception e) {
+				WxAccount account = meta.getWxAccount();
+				account.setIsOnline(false);
+				f.getWxAccountRepo().save(account);
 				log.error(e.getMessage(), e);
 			}			
 			log.info("等待5s...");

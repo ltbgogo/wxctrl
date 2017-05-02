@@ -6,5 +6,6 @@ import com.abc.test.domain.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 
+	User findByUserNameAndPassword(String userName, String password);
 }
  

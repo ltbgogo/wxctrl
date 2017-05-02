@@ -32,11 +32,13 @@ public class WxHttpClient implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public WxHttpClient(WxMeta meta) {
+	public WxHttpClient(WxMeta meta, HttpClientConfig httpClientConfig) {
 		this.meta = meta;
+		this.httpClientConfig = httpClientConfig;
 	}
 	
 	private WxMeta meta;
+	private HttpClientConfig httpClientConfig;
 	
 	private Map<String, JSONObject> grpDataCache = new HashMap<String, JSONObject>();
 	
@@ -111,17 +113,6 @@ public class WxHttpClient implements Serializable {
 		meta.setMemberList(data.getJSONArray("MemberList"));
 	}
 	
-	/**
-	 * Http客户端
-	 */
-	private final HttpClientConfig httpClientConfig = new HttpClientConfig();
-	{
-		httpClientConfig.getRequestHeaderMap().put("Host", "wx.qq.com");
-		httpClientConfig.getRequestHeaderMap().put("Referer", "https://wx.qq.com/?&lang=zh_CN");
-		httpClientConfig.setCookieStore(new CookieStore());
-		httpClientConfig.setHttpProxy("proxy3.bj.petrochina:8080");
-		httpClientConfig.setEnableSNIExtension(false);
-	};
 	public HttpClient createHttpClient(String url) {
 		return new HttpClient(url, this.httpClientConfig);
 	}

@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import com.abc.test.utility.SpringManager;
+import com.abc.test.manager.SpringManager;
 
 /**
  * 数据仓库工程

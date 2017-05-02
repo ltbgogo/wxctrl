@@ -18,11 +18,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "t_app_log")
 @Entity
-public class AppLog {
-
-	@Id
-	@GeneratedValue
-	private String id;
+public class AppLog extends IdDomain {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "event_date")

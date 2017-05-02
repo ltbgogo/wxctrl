@@ -1,26 +1,22 @@
 package com.abc.test.wx;
 
+import static com.abc.test.repository.RepoFactory.f;
+
 import java.io.File;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import static com.abc.test.repository.RepoFactory.f;
-
 import com.abc.test.domain.WxMsg;
 import com.abc.test.utility.JsonUtil;
 import com.abc.test.utility.httpclient.HttpClient;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.ws.resources.SenderMessages;
 
 @Log4j
 @AllArgsConstructor
@@ -52,7 +48,7 @@ public class WxMsgHandler implements Serializable {
 							this.handleMe2Grp(msg);	
 						} //我发给个人的消息 
 						else {
-							this.handleMe2Individual(msg);
+							this.handleMe2Contact(msg);
 						}
 					} //别人发送的群消息 
 					else if (msg.getString("FromUserName").startsWith("@@")) {
@@ -100,6 +96,7 @@ public class WxMsgHandler implements Serializable {
 
 		//将消息持久化到数据库
 		WxMsg wxMsg = new WxMsg();
+		wxMsg.setWxAccount(meta.getWxAccount());
 		wxMsg.setContent(content);
 		wxMsg.setCreateTime(createTime);
 		wxMsg.setGroupName(grpNickName);
@@ -110,7 +107,7 @@ public class WxMsgHandler implements Serializable {
 	/**
 	 * 处理我发送给个人的消息
 	 */
-	private void handleMe2Individual(JSONObject msg) {
+	private void handleMe2Contact(JSONObject msg) {
 		String tmpToUserName = msg.getString("ToUserName");
 		JSONObject toUserInfo = JsonUtil.search(meta.getMemberList(), "UserName", tmpToUserName);
 		String toUserNickName = toUserInfo.getString("NickName");
@@ -119,6 +116,7 @@ public class WxMsgHandler implements Serializable {
 
 		//将消息持久化到数据库
 		WxMsg wxMsg = new WxMsg();
+		wxMsg.setWxAccount(meta.getWxAccount());
 		wxMsg.setContent(content);
 		wxMsg.setToUserName(toUserNickName);
 		wxMsg.setCreateTime(createTime);
@@ -141,6 +139,7 @@ public class WxMsgHandler implements Serializable {
 	
 		//将消息持久化到数据库
 		WxMsg wxMsg = new WxMsg();
+		wxMsg.setWxAccount(meta.getWxAccount());
 		wxMsg.setContent(realContent);
 		wxMsg.setCreateTime(createTime);
 		wxMsg.setFromUserName(senderNickName);

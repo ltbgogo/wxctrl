@@ -1,4 +1,4 @@
-package com.abc.test.utility;
+package com.abc.test.manager;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -8,9 +8,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.stereotype.Component;
 
-import com.abc.test.Application;
+import com.abc.test.WebApplication;
 
+@Component
 public class SpringManager implements ApplicationContextAware {
 
 	private static ApplicationContext applicationContext;
