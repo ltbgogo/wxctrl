@@ -16,7 +16,7 @@ Welcome<br/>
 
     //判断当前浏览器是否支持WebSocket
     if('WebSocket' in window){
-        websocket = new WebSocket("ws://localhost:8084/websocket");
+        websocket = new WebSocket("ws://localhost/wx/websocket");
     }
     else{
         alert('Not support websocket')
@@ -64,5 +64,3 @@ Welcome<br/>
     }
 </script>
 </html>
-
-

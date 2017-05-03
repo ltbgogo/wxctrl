@@ -46,6 +46,11 @@ public class WxController {
 	@Autowired
 	private WxApp wxApp;
 	
+	@RequestMapping("test")
+	ModelAndView test() {
+		return new ModelAndView("test");
+	}
+	
 	@RequestMapping("preAddClient")
 	ModelAndView preAddClient() {
 		return new ModelAndView("addClient");
