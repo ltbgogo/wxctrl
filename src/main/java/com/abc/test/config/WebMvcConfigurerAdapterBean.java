@@ -13,6 +13,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -26,8 +28,12 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
-@Component
-public class CustomWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
+public class WebMvcConfigurerAdapterBean extends WebMvcConfigurerAdapter {
+	
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+	    registry.addViewController("/").setViewName("redirect:/index.html");
+	}
 
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
