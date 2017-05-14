@@ -1,22 +1,9 @@
-
 <#include "inc/inc_header.ftl">
 
 <style>
-	#id_msg_list {
-		border: 1px solid rgb(211, 211, 211);
-		padding: 5px;
-		height: 200px; 
-		overflow: scroll;
-	}
-	#id_msg_sender textarea {
-		width: 100%; 
-		resize: none; 
-		border: 1px solid rgb(211, 211, 211);
-		height: 200px; 
-	}
-	#id_back_btn {
-		margin: 5px 0;
-	}
+	#id_msg_list {border: 1px solid rgb(211, 211, 211); padding: 5px; height: 200px; overflow: scroll;}	
+	#id_msg_sender textarea {width: 100%; resize: none; border: 1px solid rgb(211, 211, 211); height: 80px;}
+	#id_back_btn {margin: 5px 0;}
 </style>
 
 <a id="id_back_btn" href="${app.contextPath}/wx/listClients" class="btn btn-default">
@@ -43,6 +30,7 @@
 		<!-- 消息发送面板 -->
 		<div id="id_msg_sender">
 			<textarea></textarea>
+			<button id="id_send_msg_btn" onclick="sendMsg();" class="btn btn-default">发送</button>
 		</div>
 	</div>
 </div>
@@ -55,6 +43,14 @@
 var $g = {
 	contactATag: null	
 };
+
+/**
+ * 发送消息
+ */
+function sendMsg() {
+	var msg = $("#id_msg_sender textarea").val();
+	console.log(msg);
+}
 
 /**
  * 刷新消息列表
@@ -71,7 +67,7 @@ function refreshMsgList() {
 		}, function(data) {
 			$("#id_msg_list").empty();
 			$.each(data.result.content, function() {
-				var p = $('<li><time></time>&nbsp;<label></label><p></p></li>').appendTo("#id_msg_list");
+				var p = $('<li><b></b>&nbsp;<label></label><p></p></li>').appendTo("#id_msg_list");
 				if (this.fromUserName === null) {
 					this.fromUserName = "我";
 					p.addClass("text-right")
@@ -79,11 +75,11 @@ function refreshMsgList() {
 					p.addClass("text-left");				
 				}
 				p.find("label").html(this.fromUserName);
-				p.find("time").text(this.createTime);
+				p.find("b").text(this.createTime);
 				p.find("p").text(this.content)
 			});
 			
-// 			$("#id_msg_list").scrollTop($("#id_msg_list").get(0).scrollHeight);
+			$("#id_msg_list").scrollTop($("#id_msg_list").get(0).scrollHeight);
 		}, "json");
 	}
 }
@@ -92,27 +88,17 @@ function refreshMsgList() {
  * 执行入口
  */
 $(function() {
-	/**
-	 * 设置页面title
-	 */
+	//设置页面title
 	document.title = '${account.nickName} - ${account.isOnline ?string("在线", "离线")}';
-	/**
-	 * 发送消息监听
-	 */
-	Mousetrap($("#id_msg_sender textarea").get(0)).bind('ctrl+enter', function(e, combo) {
-		console.log($(e.currentTarget).val());
-	});
-	/**
-	 * 查看联系人消息
-	 */
+	//发送消息快捷键监听
+	Mousetrap($("#id_msg_sender textarea").get(0)).bind('ctrl+enter', sendMsg);
+	//调整消息框高度
+	$("#id_msg_list").height($("body").get(0).scrollHeight - 200); 
+	//查看联系人消息
 	$("#id_contact_list a").on("click", function() {
 		$g.contactATag = this;
 		refreshMsgList();
 	});
-	/**
-	 * 定时更新消息列表
-	 */
-// 	 setInterval(refreshMsgList, 2000);
 });
 
 </script>

@@ -93,11 +93,11 @@ public class WxController {
     }
     
     /**
-     * 客户端控制台
+     * 客户端控制台-获取对话内容
      */
     @RequestMapping("showMsgList")
     ReturnVO clientConsole(String wxAccountId, String type, String contactName, 
-    		@PageableDefault(value = 15, sort = {"createTime"}, direction = Direction.DESC) Pageable pageable) {
+    		@PageableDefault(value = 15, sort = {"createTime"}, direction = Direction.ASC) Pageable pageable) {
     	WxAccount account = wxAccountRepo.findOne(wxAccountId);
     	if ("group".equals(type)) {
     		Page<WxMsg> page = wxMsgRepo.findGroupMsg(account, contactName, pageable);

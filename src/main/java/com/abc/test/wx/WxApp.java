@@ -37,7 +37,6 @@ public class WxApp {
 	
 	@SneakyThrows
 	public void test() {
-		
 		WxMeta meta = startOne();
 		Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start " + meta.getFile_qrCode()});
 	}
