@@ -16,11 +16,11 @@ import javax.websocket.server.ServerEndpoint;
 import lombok.extern.log4j.Log4j;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.stereotype.Component;
 
 @Log4j
 @ServerEndpoint(value = "/wx/websocket")
-@Component
 public class WxWebSocket {
 	
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。

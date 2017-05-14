@@ -15,6 +15,7 @@ import lombok.SneakyThrows;
 
 import org.apache.commons.io.FileUtils;
 
+import com.abc.test.config.AppConfigBean;
 import com.abc.test.domain.User;
 import com.abc.test.domain.WxAccount;
 import com.abc.test.repository.RepoFactory;
@@ -94,7 +95,7 @@ public class WxMeta implements Serializable {
 			config.getRequestHeaderMap().put("Host", "wx.qq.com");
 			config.getRequestHeaderMap().put("Referer", "https://wx.qq.com/?&lang=zh_CN");
 			config.setCookieStore(this.cookieStore);
-			config.setHttpProxy("proxy3.bj.petrochina:8080");
+			config.setHttpProxy(AppConfigBean.INSTANCE.getHttpProxy());
 			config.setEnableSNIExtension(false);
 			this.httpClient = new WxHttpClient(this, config); 
 		}

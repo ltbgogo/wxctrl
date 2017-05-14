@@ -19,10 +19,12 @@ import org.hibernate.annotations.OptimisticLocking;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.EnableLoadTimeWeaving;
 import org.springframework.context.annotation.EnableLoadTimeWeaving.AspectJWeaving;
 import org.springframework.context.annotation.Import;
@@ -34,7 +36,8 @@ import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConve
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.abc.test.config.AppConfig;
+import com.abc.test.config.AppConfigBean;
+import com.abc.test.config.BeanConfig;
 import com.abc.test.manager.SpringManager;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -48,27 +51,14 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
-//@Import({JmsConfig.class})
-//@EnableJms
+@Import({BeanConfig.class})
 @SpringBootApplication
 public class WebApplication {
-	
-	@Bean
-	ServletContextInitializer createServletContextInitializer() {
-		return new ServletContextInitializer() {
-			public void onStartup(ServletContext servletContext) throws ServletException {
-				AppConfig.INSTANCE.setContextPath(servletContext.getContextPath());
-				servletContext.setAttribute("app", AppConfig.INSTANCE);
-			}
-		};
-	}
-	
-	@Bean
-	AppConfig createAppConfig() {
-		return AppConfig.INSTANCE;
-	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(WebApplication.class, args);
 	}
 }
+
+
+

@@ -14,7 +14,14 @@
 		border: 1px solid rgb(211, 211, 211);
 		height: 200px; 
 	}
+	#id_back_btn {
+		margin: 5px 0;
+	}
 </style>
+
+<a id="id_back_btn" href="${app.contextPath}/wx/listClients" class="btn btn-default">
+	<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+</a>
 
 <div class="row">
 	<!-- 联系人列表 -->

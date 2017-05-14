@@ -35,10 +35,11 @@ public class WxMsgHandler implements Serializable {
 				int msgType = msg.getIntValue("MsgType");
 //				String name = getUserRemarkName(msg.getString("FromUserName"));
 //				String content = msg.getString("Content");
-
+				//微信初始化消息
 				if (msgType == 51) {
 					log.info("成功截获微信初始化消息");
-				} else if (msgType == 1) {
+				} //文本消息发送接收 
+				else if (msgType == 1) {
 					if (WxConst.FILTER_USERS.contains(msg.getString("ToUserName"))) {
 						continue;
 					} //我发送的消息 
@@ -53,15 +54,19 @@ public class WxMsgHandler implements Serializable {
 					} //别人发送的群消息 
 					else if (msg.getString("FromUserName").startsWith("@@")) {
 						this.handleOther2Grp(msg);						
-					} else if (msg.getString("ToUserName").indexOf("@@") != -1) {
+					} //别人发送给我的消息
+					else if (msg.getString("FromUserName").matches("@[^@].+")) {
+						this.handleContact2Me(msg);	
+					}
+//					else if (msg.getString("ToUserName").indexOf("@@") != -1) {
 //						String[] peopleContent = content.split(":<br/>");
 //						log.info("|" + name + "| " + peopleContent[0] + ":\n" + peopleContent[1].replace("<br/>", "\n"));
-					} else {
+//					} else {
 //						log.info(name + ": " + content);
 //						String ans = robot.talk(content);
 //						webwxsendmsg(wechatMeta, ans, msg.getString("FromUserName"));
 //						log.info("自动回复 " + ans);
-					}
+//					}
 				} else if (msgType == 3) {
 					String msgId = msg.getString("MsgId");
 					@Cleanup
@@ -100,6 +105,27 @@ public class WxMsgHandler implements Serializable {
 		wxMsg.setContent(content);
 		wxMsg.setCreateTime(createTime);
 		wxMsg.setGroupName(grpNickName);
+		wxMsg.setMsgId(msg.getString("MsgId"));
+		f.getWxMsgRepo().save(wxMsg);
+	}
+	
+	
+	/**
+	 * 处理个人发送给我的消息
+	 */
+	private void handleContact2Me(JSONObject msg) {
+		String tmpFromUserName = msg.getString("FromUserName");
+		JSONObject fromUserInfo = JsonUtil.search(meta.getMemberList(), "UserName", tmpFromUserName);
+		String fromUserNickName = fromUserInfo.getString("NickName");
+		String content = msg.getString("Content");
+		Date createTime = new Date(Long.parseLong(msg.getString("CreateTime") + "000"));
+
+		//将消息持久化到数据库
+		WxMsg wxMsg = new WxMsg();
+		wxMsg.setWxAccount(meta.getWxAccount());
+		wxMsg.setContent(content);
+		wxMsg.setFromUserName(fromUserNickName);
+		wxMsg.setCreateTime(createTime);
 		wxMsg.setMsgId(msg.getString("MsgId"));
 		f.getWxMsgRepo().save(wxMsg);
 	}

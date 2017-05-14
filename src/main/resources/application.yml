@@ -1,7 +1,6 @@
 
 appconfig:
-    name: sb-ms-custdepl
-    version: 0.1-CUSTOMER
+#    http_proxy: proxy3.bj.petrochina:8080
     list:
         - name: my another name
           description: my description
@@ -20,7 +19,7 @@ spring:
             enabled: false
     datasource:
         driverClassName: org.h2.Driver
-        url: jdbc:h2:tcp://localhost:9092/d:/db/h2/test
+        url: jdbc:h2:tcp://localhost:9092/d:/db/h2/wx
         username: test
         password: test
     freemarker:

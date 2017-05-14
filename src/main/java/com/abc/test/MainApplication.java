@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.SpringTemplateLoader;
 
 import com.abc.test.WebApplication;
+import com.abc.test.config.AppConfigBean;
 import com.abc.test.domain.User;
 import com.abc.test.domain.WxAccount;
 import com.abc.test.manager.SpringManager;
@@ -32,8 +33,10 @@ public class MainApplication {
 	public static void main(String[] args) {
 		IOUtil.forkConsoleOut("d://test//out.txt");
 		SpringManager.startMailApplication(WebApplication.class, args);
-		MainApplication app = SpringManager.getBean(MainApplication.class);
-		app.run();
+		System.out.println("*****" + SpringManager.getBean(AppConfigBean.class).getHttpProxy());
+		
+//		MainApplication app = SpringManager.getBean(MainApplication.class);
+//		app.run();
 	}
 	
 	@SneakyThrows

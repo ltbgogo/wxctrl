@@ -98,15 +98,14 @@ public class WxController {
     @RequestMapping("showMsgList")
     ReturnVO clientConsole(String wxAccountId, String type, String contactName, 
     		@PageableDefault(value = 15, sort = {"createTime"}, direction = Direction.DESC) Pageable pageable) {
-//    	WxAccount account = wxAccountRepo.findOne(wxAccountId);
-//    	if ("group".equals(type)) {
-//    		Page<WxMsg> page = wxMsgRepo.findGroupMsg(account, contactName, pageable);
-//    		return ReturnVO.succeed(page);
-//    	} else {
-//    		Page<WxMsg> page = wxMsgRepo.findContactMsg(account, contactName, pageable);
-//    		return ReturnVO.succeed(page);
-//    	}
-    	return ReturnVO.succeed(Arrays.asList(234234L, new Date()));
+    	WxAccount account = wxAccountRepo.findOne(wxAccountId);
+    	if ("group".equals(type)) {
+    		Page<WxMsg> page = wxMsgRepo.findGroupMsg(account, contactName, pageable);
+    		return ReturnVO.succeed(page);
+    	} else {
+    		Page<WxMsg> page = wxMsgRepo.findContactMsg(account, contactName, pageable);
+    		return ReturnVO.succeed(page);
+    	}
     }
 }
 
