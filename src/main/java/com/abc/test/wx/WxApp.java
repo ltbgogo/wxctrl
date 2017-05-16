@@ -38,39 +38,7 @@ public class WxApp {
 	@SneakyThrows
 	public void test() {
 		WxMeta meta = startOne();
-		Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start " + meta.getFile_qrCode()});
-	}
-	
-	public void restoreAllSessions() {
-		for (User user : f.getUserRepo().findAll()) {
-			this.restoreSession(user);
-		}
-	}
-	
-	public void restoreSession(User user) {
-		for (WxAccount account : user.getWxAccounts()) {
-			final WxMeta meta = account.getMeta(); 
-			if (meta != null) {
-				try {
-					JSONObject syncStatus = meta.getHttpClient().syncCheck();	
-					if (syncStatus.getIntValue("retcode") == 1102 ||
-							syncStatus.getIntValue("retcode") == 1101) {
-						account.setMeta(null);
-						account.setIsOnline(false);
-						f.getWxAccountRepo().save(account);
-					} else {
-						new Thread(new Runnable() {
-							@Override
-							public void run() {
-								meta.getMsgListener().start();
-							}
-						}).start();
-					}
-				} catch (Exception e) {
-					log.error(e.getMessage(), e);
-				}
-			}
-		}
+		Runtime.getRuntime().exec(new String[] {"cmd", "/c", "start " + meta.getQrCodeImg()});
 	}
 	
 	public WxMeta startOne() {

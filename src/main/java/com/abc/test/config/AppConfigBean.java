@@ -1,5 +1,6 @@
 package com.abc.test.config;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class AppConfigBean {
 
 	private String contextPath;
 	private String httpProxy;
+	private String dataDirPath;
 	
 	public static final AppConfigBean INSTANCE = new AppConfigBean();
 }

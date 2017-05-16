@@ -32,6 +32,9 @@ import com.abc.test.utility.JsonUtil;
 import com.abc.test.utility.ReturnVO;
 import com.abc.test.wx.WxApp;
 import com.abc.test.wx.WxMeta;
+import com.abc.test.wx.WxMetaStorage;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 @RestController
 @RequestMapping("/wx")
@@ -74,7 +77,7 @@ public class WxController {
      */
     @RequestMapping("outputQrcode")
     void outputQrcode(HttpServletResponse response) throws IOException {
-    	FileUtils.copyFile(UserManager.getUserInfo().getLoginMeta().getFile_qrCode(), response.getOutputStream());
+    	FileUtils.copyFile(UserManager.getUserInfo().getLoginMeta().getQrCodeImg(), response.getOutputStream());
     }
     
     /**
@@ -105,6 +108,26 @@ public class WxController {
     	} else {
     		Page<WxMsg> page = wxMsgRepo.findContactMsg(account, contactName, pageable);
     		return ReturnVO.succeed(page);
+    	}
+    }
+    
+    /**
+     * 客户端控制台-获取对话内容
+     */
+    @RequestMapping("sendMsg")
+    ReturnVO sendMsg(String wxAccountId, String type, String nickName, String msg) {
+    	WxMeta meta = WxMetaStorage.get(wxAccountId);
+    	if (meta == null) {
+    		return ReturnVO.fail("账号处于离线状态！");
+    	} else {
+    		JSONArray members = "group".equals(type) ? meta.getGroupList() : meta.getContactList();
+    		for (int i = 0; i < members.size(); i++) {
+    			JSONObject member = members.getJSONObject(i);
+    			if (nickName.equals(member.getString("NickName"))) {
+    				meta.getHttpClient().webwxsendmsg(msg, member.getString("UserName"));
+    			}
+    		}
+    		return ReturnVO.SUCCESS;
     	}
     }
 }

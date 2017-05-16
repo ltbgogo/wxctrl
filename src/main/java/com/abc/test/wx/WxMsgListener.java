@@ -23,15 +23,25 @@ public class WxMsgListener implements Serializable {
 //	int playWeChat = 0;
 	private WxMeta meta;
 	
+	public void start() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				_start();
+			}
+		}).start();;
+	}
+	
 	@SneakyThrows
-	public void start(){
+	public void _start() {
 		//记录登录信息
 		{
 			WxAccount account = meta.getWxAccount();
 			account.setLastLoginDate(new Date());
-			account.setMeta(meta);
 			account.setIsOnline(true);
 			f.getWxAccountRepo().save(account);
+			//存储元数据信息
+			WxMetaStorage.put(meta);
 		}
 		
 		log.info("进入消息监听模式 ...");

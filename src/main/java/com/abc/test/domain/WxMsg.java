@@ -50,7 +50,7 @@ public class WxMsg extends IdDomain {
 	/**
 	 * 消息编号
 	 */
-	@Column(name = "msg_id", length = 50)
+	@Column(name = "msg_id", length = 50, unique = true)
 	private String msgId;
 	/**
 	 * 消息内容

@@ -146,7 +146,7 @@ public class WxHttpClient implements Serializable {
 		c.getQueryMap().put("_", DateUtil.seconds());
 		c.connect();
 		
-		FileUtils.copyInputStreamToFile(c.getResponseByStream(), meta.getFile_qrCode());
+		FileUtils.copyInputStreamToFile(c.getResponseByStream(), meta.getQrCodeImg());
 	}
 	
 	/**
@@ -296,11 +296,12 @@ public class WxHttpClient implements Serializable {
 	/**
 	 * 发送消息
 	 */
-	private void webwxsendmsg(String content, String to) {
+	public void webwxsendmsg(String msgContent, String to) {
 		String clientMsgId = System.nanoTime() + "";
 		JSONObject Msg = new JSONObject();
+		//1应该是文本消息
 		Msg.put("Type", 1);
-		Msg.put("Content", content);
+		Msg.put("Content", msgContent);
 		Msg.put("FromUserName", meta.getUser().getString("UserName"));
 		Msg.put("ToUserName", to);
 		Msg.put("LocalID", clientMsgId);
@@ -314,7 +315,7 @@ public class WxHttpClient implements Serializable {
 		c.getContentJSONObject().put("Msg", Msg);
 		c.connect();
 		
-		log.info("发送消息...");
+		log.info("发送消息..." + msgContent);
 	}
 	
 	public JSONObject webwxsync(){

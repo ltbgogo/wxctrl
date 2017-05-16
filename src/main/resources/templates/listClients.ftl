@@ -16,7 +16,7 @@
 	<tbody>
 		<#list r.result as account>
 			<tr>
-				<th scope="row"><a target="_blank" href="${app.contextPath}/wx/clientConsole/${account.id}">${account.nickName}</a></th>
+				<th scope="row"><a href="${app.contextPath}/wx/clientConsole/${account.id}">${account.nickName}</a></th>
 				<td>${account.lastLoginDate ?string("yyyy-MM-dd HH:mm:ss")}</td>
 				<td>${account.isOnline ?string("在线", "离线")}</td>
 				<td>
@@ -26,7 +26,7 @@
 						</button>
 						<ul class="dropdown-menu dropdown-menu-right" role="menu">
 							<li>
-								<a target="_blank" href="${app.contextPath}/wx/clientConsole/${account.id}">控制台</a>
+								<a href="${app.contextPath}/wx/clientConsole/${account.id}">控制台</a>
 							</li>
 						</ul>
 					</div>

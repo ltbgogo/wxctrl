@@ -32,12 +32,9 @@ public class WxMeta implements Serializable {
 	
 	private String ownerId;
 	
-	private String frontMsg;
-
 	private String base_uri;
 	private String redirect_uri;
 	private String webpush_url;
-	
 	private String uuid;
 	
 	private String skey;
@@ -50,9 +47,6 @@ public class WxMeta implements Serializable {
 	private JSONObject baseRequest;
 	private JSONObject syncKey;
 	private JSONObject user;
-	
-	private File dir_root = new File("d://test/wx");
-	private File file_qrCode = FileUtils.getFile(dir_root, "qrcode." + deviceId + ".jpg");
 		
 	// 微信联系人列表，可聊天的联系人列表
 	private JSONArray memberList;
@@ -61,6 +55,18 @@ public class WxMeta implements Serializable {
 	
 	private CookieStore cookieStore = new CookieStore();
 	
+	/**
+	 * 微信登录码图片
+	 */
+	public File getQrCodeImg() {
+		File qrCodeImg = FileUtils.getFile(WxConst.TMP_DIR, "qrcode", deviceId + ".jpg");
+		qrCodeImg.getParentFile().mkdirs();
+		return qrCodeImg;
+	}
+	
+	/**
+	 * 微信账号
+	 */
 	public WxAccount getWxAccount() {
 		WxAccount wxAccount = f.getWxAccountRepo().findByUin(this.getWxuin());
 		if (wxAccount == null) {
@@ -73,8 +79,11 @@ public class WxMeta implements Serializable {
 		return wxAccount;
 	}
 	
+	/**
+	 * 账号拥有者
+	 */
 	public User getOwner() {
-		return RepoFactory.f.getUserRepo().findOne(this.getOwnerId());
+		return f.getUserRepo().findOne(this.getOwnerId());
 	}
 	
 	public void setSyncKey(JSONObject syncKey) {

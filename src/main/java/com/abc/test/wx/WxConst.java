@@ -1,8 +1,10 @@
 package com.abc.test.wx;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class WxConst {
@@ -11,7 +13,8 @@ public class WxConst {
 	public static final String BASE_URL = "https://webpush2.weixin.qq.com/cgi-bin/mmwebwx-bin";
 	public static final String JS_LOGIN_URL = "https://login.weixin.qq.com/jslogin";
 	public static final String QRCODE_URL = "https://login.weixin.qq.com/qrcode/";
-		
+	public static final File TMP_DIR = FileUtils.getFile(FileUtils.getTempDirectory(), "wxctrl");
+	
 	// 特殊用户 须过滤
 	public static final List<String> FILTER_USERS = Arrays.asList("newsapp", "fmessage", "filehelper", "weibo", "qqmail", 
 			"fmessage", "tmessage", "qmessage", "qqsync", "floatbottle", "lbsapp", "shakeapp", "medianote", "qqfriend", 

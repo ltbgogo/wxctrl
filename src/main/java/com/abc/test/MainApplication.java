@@ -31,7 +31,7 @@ public class MainApplication {
 	
 	@SneakyThrows
 	public static void main(String[] args) {
-		IOUtil.forkConsoleOut("d://test//out.txt");
+//		IOUtil.forkConsoleOut("d://test//out.txt");
 		SpringManager.startMailApplication(WebApplication.class, args);
 		System.out.println("*****" + SpringManager.getBean(AppConfigBean.class).getHttpProxy());
 		

@@ -30,7 +30,7 @@ import com.abc.test.wx.WxMeta;
 public class WxAccount extends IdDomain {
 	
 	/**
-	 * 微信用户编号
+	 * 微信用户编号，wxuin
 	 */
 	private String uin;
 	/**
@@ -56,40 +56,11 @@ public class WxAccount extends IdDomain {
     @Temporal(TemporalType.TIMESTAMP)
 	private Date lastLogoutDate;
 	/**
-	 * 登录的cookie信息
-	 */
-	@Column(name = "meta_serial")
-	@Basic(fetch = FetchType.LAZY)
-	@Lob
-	private byte[] metaSerial;
-	/**
 	 * 是否离线
 	 */
 	@Column(name = "is_online")
 	private Boolean isOnline;
 
-	@SneakyThrows
-	public void setMeta(WxMeta meta) {
-		if (meta == null) {
-			this.setMetaSerial(null);
-		} else {
-			//序列化对象
-			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(byteArrayOutputStream);
-			oos.writeObject(meta);    //写入customer对象
-			this.setMetaSerial(byteArrayOutputStream.toByteArray());	
-		}
-	}
-	
-	@SneakyThrows
-	public WxMeta getMeta() {
-		if (this.getMetaSerial() != null) {
-			ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(this.getMetaSerial()));
-			return (WxMeta) ois.readObject();	
-		} else {
-			return null;
-		}
-	}
 }
 
 

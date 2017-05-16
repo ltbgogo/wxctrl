@@ -14,6 +14,11 @@ import com.abc.test.domain.WxMsg;
 public interface WxMsgRepository extends JpaRepository<WxMsg, String> {
 	
 	/**
+	 * 根据消息编号查找消息
+	 */
+	WxMsg findByMsgId(String msgId);
+	
+	/**
 	 * 查询群会话
 	 */
 	@Query("select t from WxMsg t "
