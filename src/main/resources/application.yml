@@ -1,6 +1,6 @@
 
 appconfig:
-    http_proxy: proxy3.bj.petrochina:8080
+#    http_proxy: proxy3.bj.petrochina:8080
     data_dir_path: d://wx//data
     list:
         - name: my another name
