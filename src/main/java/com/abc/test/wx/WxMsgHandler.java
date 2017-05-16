@@ -119,7 +119,7 @@ public class WxMsgHandler implements Serializable {
 	 */
 	private void handleContact2Me(JSONObject msg) {
 		String tmpFromUserName = msg.getString("FromUserName");
-		JSONObject fromUserInfo = JsonUtil.search(meta.getMemberList(), "UserName", tmpFromUserName);
+		JSONObject fromUserInfo = JsonUtil.searchObject(meta.getContactList(), "UserName", tmpFromUserName);
 		String fromUserNickName = fromUserInfo.getString("NickName");
 		String content = msg.getString("Content");
 		Date createTime = new Date(Long.parseLong(msg.getString("CreateTime") + "000"));
@@ -139,7 +139,7 @@ public class WxMsgHandler implements Serializable {
 	 */
 	private void handleMe2Contact(JSONObject msg) {
 		String tmpToUserName = msg.getString("ToUserName");
-		JSONObject toUserInfo = JsonUtil.search(meta.getMemberList(), "UserName", tmpToUserName);
+		JSONObject toUserInfo = JsonUtil.searchObject(meta.getContactList(), "UserName", tmpToUserName);
 		String toUserNickName = toUserInfo.getString("NickName");
 		String content = msg.getString("Content");
 		Date createTime = new Date(Long.parseLong(msg.getString("CreateTime") + "000"));
@@ -162,7 +162,7 @@ public class WxMsgHandler implements Serializable {
 		String tmpSenderName = StringUtils.substringBefore(msg.getString("Content"), ":");
 		String realContent = StringUtils.substringAfter(msg.getString("Content"), ">");
 		JSONObject grpData = meta.getHttpClient().getGrpInfo(tmpGrpName);
-		JSONObject senderInfo = JsonUtil.search(grpData.getJSONArray("MemberList"), "UserName", tmpSenderName);
+		JSONObject senderInfo = JsonUtil.searchObject(grpData.getJSONArray("MemberList"), "UserName", tmpSenderName);
 		String senderNickName = senderInfo.getString("NickName");
 		String grpNickName = grpData.getString("NickName");
 		Date createTime = new Date(Long.parseLong(msg.getString("CreateTime") + "000"));
@@ -178,18 +178,10 @@ public class WxMsgHandler implements Serializable {
 		f.getWxMsgRepo().save(wxMsg);
 	}
 	
-	private String getUserRemarkName(String id) {
-		String name = "这个人物名字未知";
-		for (JSONObject member : JsonUtil.toJsonObjects(meta.getMemberList())) {
-			if (member.getString("UserName").equals(id)) {
-				if (StringUtils.isNotBlank(member.getString("RemarkName"))) {
-					name = member.getString("RemarkName");
-				} else {
-					name = member.getString("NickName");
-				}
-				return name;
-			}
-		}
-		return name;
-	}
 }
+
+
+
+
+
+

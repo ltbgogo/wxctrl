@@ -19,6 +19,7 @@ import com.abc.test.config.AppConfigBean;
 import com.abc.test.domain.User;
 import com.abc.test.domain.WxAccount;
 import com.abc.test.repository.RepoFactory;
+import com.abc.test.utility.JsonUtil;
 import com.abc.test.utility.httpclient.CookieStore;
 import com.abc.test.utility.httpclient.HttpClientConfig;
 import com.alibaba.fastjson.JSONArray;
@@ -49,9 +50,8 @@ public class WxMeta implements Serializable {
 	private JSONObject user;
 		
 	// 微信联系人列表，可聊天的联系人列表
-	private JSONArray memberList;
-	private JSONArray contactList;
-	private JSONArray groupList;
+	private JSONArray contactList = new JSONArray();
+	private JSONArray groupList = new JSONArray();
 	
 	private CookieStore cookieStore = new CookieStore();
 	
@@ -125,6 +125,18 @@ public class WxMeta implements Serializable {
 			this.msgListener = new WxMsgListener(this); 
 		}
 		return this.msgListener;
+	}
+	
+	public void addContact(JSONObject contact) {
+		if (JsonUtil.searchObject(this.contactList, "UserName", contact.get("UserName")) == null) {
+			this.contactList.add(contact);
+		}
+	}
+	
+	public void addGroup(JSONObject group) {
+		if (JsonUtil.searchObject(this.groupList, "UserName", group.get("UserName")) == null) {
+			this.groupList.add(group);
+		}
 	}
 }
 

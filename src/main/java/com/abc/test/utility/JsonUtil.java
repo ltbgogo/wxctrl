@@ -41,7 +41,18 @@ public class JsonUtil {
 		return parseJson(toJson(u), Map.class);
 	}
 	
-	public static JSONObject search(JSONArray jsonObjectArray, String jsonObjectKey, Object jsonObjectValue) {
+	public static JSONArray searchObjects(JSONArray jsonObjectArray, String jsonObjectKey, Object jsonObjectValue) {
+		JSONArray r = new JSONArray();
+		for (JSONObject o : JsonUtil.toJsonObjects(jsonObjectArray)) {
+			if (jsonObjectValue.equals(o.getObject(jsonObjectKey, jsonObjectValue.getClass()))) {
+				r.add(o);
+			}
+		}
+		return r;
+	}
+	
+	public static JSONObject searchObject(JSONArray jsonObjectArray, String jsonObjectKey, Object jsonObjectValue) {
+		JSONArray r = new JSONArray();
 		for (JSONObject o : JsonUtil.toJsonObjects(jsonObjectArray)) {
 			if (jsonObjectValue.equals(o.getObject(jsonObjectKey, jsonObjectValue.getClass()))) {
 				return o;
@@ -50,3 +61,8 @@ public class JsonUtil {
 		return null;
 	}
 }
+
+
+
+
+

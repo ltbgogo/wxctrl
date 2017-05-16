@@ -18,6 +18,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.abc.test.utility.DateUtil;
+import com.abc.test.utility.JsonUtil;
 import com.abc.test.utility.RegexUtil;
 import com.abc.test.utility.httpclient.CookieStore;
 import com.abc.test.utility.httpclient.HttpClient;
@@ -39,20 +40,19 @@ public class WxHttpClient implements Serializable {
 	
 	private WxMeta meta;
 	private HttpClientConfig httpClientConfig;
-	
-	private Map<String, JSONObject> grpDataCache = new HashMap<String, JSONObject>();
-	
+		
 	public JSONObject getGrpInfo(String tmpGrpName) {
-		if (!grpDataCache.containsKey(tmpGrpName)) {
+		JSONObject group = JsonUtil.searchObject(meta.getGroupList(), "UserName", tmpGrpName);
+		if (group == null) {
 			JSONObject data = batchGetContact(Arrays.asList(tmpGrpName));
-			JSONObject grpData = data.getJSONArray("ContactList").getJSONObject(0);
-			grpDataCache.put(tmpGrpName, grpData);
+			group = data.getJSONArray("ContactList").getJSONObject(0);
+			meta.addGroup(group);
 		}
-		return grpDataCache.get(tmpGrpName);
+		return group;
 	}
 
 	/**
-	 * 获取群
+	 * 获取群信息
 	 */
 	public JSONObject batchGetContact(List<String> tmpUserNames) {
 		@Cleanup
@@ -110,7 +110,6 @@ public class WxHttpClient implements Serializable {
 			contactList.add(contact);
 		}
 		meta.setContactList(contactList);
-		meta.setMemberList(data.getJSONArray("MemberList"));
 	}
 	
 	public HttpClient createHttpClient(String url) {
@@ -247,8 +246,11 @@ public class WxHttpClient implements Serializable {
 		this.validateRet(data, "微信初始化失败");
 		meta.setSyncKey(data.getJSONObject("SyncKey"));
 		meta.setUser(data.getJSONObject("User"));
+		
+		//将检测到的群聊给缓存起来
+		this.filterAndCacheGroups(data.getJSONArray("ContactList"));
 	}
-	
+
 	/**
 	 * 选择同步线路
 	 */
@@ -332,7 +334,22 @@ public class WxHttpClient implements Serializable {
 		this.validateRet(data, "同步syncKey失败");
 		meta.setSyncKey(data.getJSONObject("SyncKey"));
 		
+		//将检测到的群聊给缓存起来
+		this.filterAndCacheGroups(data.getJSONArray("ModContactList"));
+		
 		return data;
+	}
+	
+	/**
+	 * 将检测到的群聊给缓存起来
+	 */
+	private void filterAndCacheGroups(JSONArray contactList) {
+		for (int i = 0; i < contactList.size(); i++) {
+			JSONObject contact = contactList.getJSONObject(i);
+			if (contact.getString("UserName").startsWith("@@")) {
+				meta.addGroup(contact);
+			}
+		}
 	}
 	
 	/**
