@@ -3,7 +3,9 @@ package com.abc.test.controller;
 import static com.abc.test.repository.RepoFactory.f;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -86,13 +89,14 @@ public class WxController {
     @RequestMapping("clientConsole/{wxAccountId}")
     ModelAndView clientConsole(@PathVariable("wxAccountId") String wxAccountId) {
     	WxAccount account = wxAccountRepo.findOne(wxAccountId);
-    	List<String> groupNames = wxMsgRepo.findGroupNames(account);
-    	Set<String> individuals = new HashSet<>();
-    	individuals.addAll(f.getWxMsgRepo().findToUserName(account));
-    	individuals.addAll(f.getWxMsgRepo().findFromUserName(account));
+    	List<String> groupNickNames = wxMsgRepo.findGroupNickNames(account);
+    	List<String> contactNickNames = new ArrayList<>();
+    	for (Object o : WxMetaStorage.get(account).getContactList()) {
+    		contactNickNames.add(((JSONObject) o).getString("NickName"));
+    	}
     	return new ModelAndView("clientConsole", "account", account)
-    			.addObject("individuals", individuals)
-    			.addObject("groupNames", groupNames);
+    			.addObject("contactNickNames", contactNickNames)
+    			.addObject("groupNickNames", groupNickNames);
     }
     
     /**
@@ -100,15 +104,17 @@ public class WxController {
      */
     @RequestMapping("showMsgList")
     ReturnVO clientConsole(String wxAccountId, String type, String contactName, 
-    		@PageableDefault(value = 15, sort = {"createTime"}, direction = Direction.ASC) Pageable pageable) {
+    		@PageableDefault(value = 15, sort = {"createTime"}, direction = Direction.DESC) Pageable pageable) {
     	WxAccount account = wxAccountRepo.findOne(wxAccountId);
+    	Page<WxMsg> page = null;
     	if ("group".equals(type)) {
-    		Page<WxMsg> page = wxMsgRepo.findGroupMsg(account, contactName, pageable);
-    		return ReturnVO.succeed(page);
+    		page = wxMsgRepo.findGroupMsg(account, contactName, pageable);
     	} else {
-    		Page<WxMsg> page = wxMsgRepo.findContactMsg(account, contactName, pageable);
-    		return ReturnVO.succeed(page);
+    		page = wxMsgRepo.findContactMsg(account, contactName, pageable);
     	}
+    	List<WxMsg> content = new ArrayList<>(page.getContent());
+		Collections.reverse(content);
+		return ReturnVO.succeed(new PageImpl<>(content, pageable, page.getTotalElements()));
     }
     
     /**
@@ -120,11 +126,18 @@ public class WxController {
     	if (meta == null) {
     		return ReturnVO.fail("账号处于离线状态！");
     	} else {
-    		JSONArray members = "group".equals(type) ? meta.getGroupList() : meta.getContactList();
+    		boolean isGrpMsg = "group".equals(type);
+    		JSONArray members = isGrpMsg ? meta.getGroupList() : meta.getContactList();
     		for (int i = 0; i < members.size(); i++) {
     			JSONObject member = members.getJSONObject(i);
     			if (nickName.equals(member.getString("NickName"))) {
     				meta.getHttpClient().webwxsendmsg(msg, member.getString("UserName"));
+    				//持久化消息到数据库
+    				if (isGrpMsg) {
+    					meta.getMsg2DB().handleMe2Grp(null, 1, nickName, msg, new Date());
+    				} else {
+    					meta.getMsg2DB().handleMe2Contact(null, 1, nickName, msg, new Date());
+    				}
     			}
     		}
     		return ReturnVO.SUCCESS;

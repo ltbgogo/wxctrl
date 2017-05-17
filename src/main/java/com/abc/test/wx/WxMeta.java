@@ -2,23 +2,17 @@ package com.abc.test.wx;
 
 import static com.abc.test.repository.RepoFactory.f;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.SneakyThrows;
 
 import org.apache.commons.io.FileUtils;
 
 import com.abc.test.config.AppConfigBean;
 import com.abc.test.domain.User;
 import com.abc.test.domain.WxAccount;
-import com.abc.test.repository.RepoFactory;
 import com.abc.test.utility.JsonUtil;
 import com.abc.test.utility.httpclient.CookieStore;
 import com.abc.test.utility.httpclient.HttpClientConfig;
@@ -119,12 +113,20 @@ public class WxMeta implements Serializable {
 		return msgHandler;
 	}
 	
-	private WxMsgListener msgListener;
+	private transient WxMsgListener msgListener;
 	public WxMsgListener getMsgListener() {
 		if (this.msgListener == null) {
 			this.msgListener = new WxMsgListener(this); 
 		}
 		return this.msgListener;
+	}
+	
+	private transient WxMsg2DB msg2db;
+	public WxMsg2DB getMsg2DB() {
+		if (this.msg2db == null) {
+			this.msg2db = new WxMsg2DB(this); 
+		}
+		return this.msg2db;
 	}
 	
 	public void addContact(JSONObject contact) {

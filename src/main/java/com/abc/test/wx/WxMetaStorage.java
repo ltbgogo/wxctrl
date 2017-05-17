@@ -43,6 +43,10 @@ public class WxMetaStorage {
 		return data.get(wxAccountId);
 	}
 	
+	public static WxMeta get(WxAccount wxAccount) {
+		return data.get(wxAccount.getId());
+	}
+	
 	/**
 	 * 存储微信元数据信息，将信息缓存到本地
 	 */

@@ -25,7 +25,7 @@ public class WxWebSocket {
     private Session session;
     
     //微信账号
-    private String uin;
+    private String wxAccountId;
 
     /**
      * 连接建立成功调用的方法*/
@@ -51,9 +51,9 @@ public class WxWebSocket {
     @OnMessage
     public void onMessage(String message, Session session) {
         log.info("来自客户端的消息:" + message);
-        //接收微信账号的uin
-        if (message.startsWith("uin:")) {
-        	this.uin = message.split(":")[1];
+        //接收微信账号的wxAccountId
+        if (message.startsWith("wxAccountId:")) {
+        	this.wxAccountId = message.split(":")[1];
         }
     }
 
@@ -78,9 +78,9 @@ public class WxWebSocket {
      * 群发消息
      */
     @SneakyThrows
-    public static void sendMessage(String uin, String message) {
+    public static void sendMessage(String wxAccountId, String message) {
         for (WxWebSocket item : webSocketSet) {
-        	if (uin.equals(item.uin)) {
+        	if (wxAccountId.equals(item.wxAccountId)) {
         		item.sendMessage(message);	
         	}
         }

@@ -1,5 +1,6 @@
 package com.abc.test.wx;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,12 +41,36 @@ public class WxHttpClient implements Serializable {
 	
 	private WxMeta meta;
 	private HttpClientConfig httpClientConfig;
-		
+	
+	/**
+	 * 下载消息图片
+	 */
+	@SneakyThrows
+	public File webwxgetmsgimg(String msgId) {
+		@Cleanup
+		HttpClient c = meta.getHttpClient().createHttpClient(meta.getBase_uri() + "/webwxgetmsgimg");
+		c.getQueryMap().put("MsgID", msgId);
+		c.getQueryMap().put("skey", meta.getSkey());
+		c.connect();
+		File file = FileUtils.getFile(WxConst.DATA_MSG_IMG_DIR, msgId + ".jpg");
+		file.getParentFile().mkdirs();
+		FileUtils.copyInputStreamToFile(c.getResponseByStream(), file);
+		log.info("保存消息图片：" + file);
+		return file;
+	}
+	
+	/**
+	 * 获取单个群信息
+	 */
 	public JSONObject getGrpInfo(String tmpGrpName) {
 		JSONObject group = JsonUtil.searchObject(meta.getGroupList(), "UserName", tmpGrpName);
-		if (group == null) {
+		if (group == null || !group.getBooleanValue("wxctrl_has_info")) {
+			if (group != null) {
+				meta.getGroupList().remove(group);
+			}
 			JSONObject data = batchGetContact(Arrays.asList(tmpGrpName));
 			group = data.getJSONArray("ContactList").getJSONObject(0);
+			group.put("wxctrl_has_info", true);
 			meta.addGroup(group);
 		}
 		return group;
@@ -87,29 +112,21 @@ public class WxHttpClient implements Serializable {
 		
 		JSONObject data = client.getResponseByJsonObject();
 		this.validateRet(data, "获取联系人失败");
-		JSONArray contactList = new JSONArray();
-		JSONArray memberList = data.getJSONArray("MemberList");
-		for (int i = 0; i < memberList.size(); i++) {
-			JSONObject contact = memberList.getJSONObject(i);
-			// 公众号/服务号
+		for (Object o : data.getJSONArray("MemberList")) {
+			JSONObject contact = (JSONObject) o;
+			//公众号/服务号
 			if (contact.getIntValue("VerifyFlag") == 8) {
-				continue;
+			} //特殊联系人
+			else if (WxConst.FILTER_USERS.contains(contact.getString("UserName"))) {
+			} //群聊
+			else if (contact.getString("UserName").indexOf("@@") != -1) {
+			} //自己
+			else if (contact.getString("UserName").equals(meta.getUser().getString("UserName"))) {
+			} //常规联系人 
+			else {
+				meta.addContact(contact);	
 			}
-			// 特殊联系人
-			if (WxConst.FILTER_USERS.contains(contact.getString("UserName"))) {
-				continue;
-			}
-			// 群聊
-			if (contact.getString("UserName").indexOf("@@") != -1) {
-				continue;
-			}
-			// 自己
-			if (contact.getString("UserName").equals(meta.getUser().getString("UserName"))) {
-				continue;
-			}
-			contactList.add(contact);
 		}
-		meta.setContactList(contactList);
 	}
 	
 	public HttpClient createHttpClient(String url) {
@@ -318,6 +335,7 @@ public class WxHttpClient implements Serializable {
 		c.connect();
 		
 		log.info("发送消息..." + msgContent);
+		
 	}
 	
 	public JSONObject webwxsync(){

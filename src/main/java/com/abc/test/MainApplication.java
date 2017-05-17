@@ -41,15 +41,15 @@ public class MainApplication {
 	
 	@SneakyThrows
 	public void run() {
-		WxAccount account = f.getWxAccountRepo().findOne("1");
-		List<String> grpNames = f.getWxMsgRepo().findGroupNames(account);
-		System.out.println(JsonUtil.toPrettyJson(grpNames));
-		
-		grpNames = f.getWxMsgRepo().findToUserName(account);
-		System.out.println(JsonUtil.toPrettyJson(grpNames));
-		
-		grpNames = f.getWxMsgRepo().findFromUserName(account);
-		System.out.println(JsonUtil.toPrettyJson(grpNames));
+//		WxAccount account = f.getWxAccountRepo().findOne("1");
+//		List<String> grpNames = f.getWxMsgRepo().findGroupNames(account);
+//		System.out.println(JsonUtil.toPrettyJson(grpNames));
+//		
+//		grpNames = f.getWxMsgRepo().findToUserName(account);
+//		System.out.println(JsonUtil.toPrettyJson(grpNames));
+//		
+//		grpNames = f.getWxMsgRepo().findFromUserName(account);
+//		System.out.println(JsonUtil.toPrettyJson(grpNames));
 		
 	}
 }

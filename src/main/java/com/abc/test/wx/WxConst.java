@@ -13,7 +13,11 @@ public class WxConst {
 	public static final String BASE_URL = "https://webpush2.weixin.qq.com/cgi-bin/mmwebwx-bin";
 	public static final String JS_LOGIN_URL = "https://login.weixin.qq.com/jslogin";
 	public static final String QRCODE_URL = "https://login.weixin.qq.com/qrcode/";
+	
+	//目录定义
 	public static final File TMP_DIR = FileUtils.getFile(FileUtils.getTempDirectory(), "wxctrl");
+	public static final File DATA_DIR = FileUtils.getFile("e://wxctrl_data");
+	public static final File DATA_MSG_IMG_DIR = FileUtils.getFile(DATA_DIR, "msg_img");
 	
 	// 特殊用户 须过滤
 	public static final List<String> FILTER_USERS = Arrays.asList("newsapp", "fmessage", "filehelper", "weibo", "qqmail", 

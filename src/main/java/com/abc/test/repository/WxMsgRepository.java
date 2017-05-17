@@ -22,37 +22,37 @@ public interface WxMsgRepository extends JpaRepository<WxMsg, String> {
 	 * 查询群会话
 	 */
 	@Query("select t from WxMsg t "
-			+ "where t.wxAccount=?1 and t.groupName=?2")
-	Page<WxMsg> findGroupMsg(WxAccount wxAccount, String groupName, Pageable pageable);
+			+ "where t.wxAccount=?1 and t.groupNickName=?2")
+	Page<WxMsg> findGroupMsg(WxAccount wxAccount, String groupNickName, Pageable pageable);
 	/**
 	 * 查询单人对话
 	 */
 	@Query("select t from WxMsg t "
-			+ "where t.wxAccount=?1 and t.groupName is null "
-			+ "and (t.fromUserName=?2 or t.toUserName=?2)")
-	Page<WxMsg> findContactMsg(WxAccount wxAccount, String contactName, Pageable pageable);
+			+ "where t.wxAccount=?1 and t.groupNickName is null "
+			+ "and (t.fromContactNickName=?2 or t.toContactNickName=?2)")
+	Page<WxMsg> findContactMsg(WxAccount wxAccount, String contactNickName, Pageable pageable);
 	/**
 	 * 查询所有会话过的组
 	 */
-	@Query("select t.groupName from WxMsg t "
-			+ "where t.wxAccount=?1 and t.groupName is not null "
-			+ "group by t.groupName "
-			+ "order by t.groupName asc")
-	List<String> findGroupNames(WxAccount account);
+	@Query("select t.groupNickName from WxMsg t "
+			+ "where t.wxAccount=?1 and t.groupNickName is not null "
+			+ "group by t.groupNickName "
+			+ "order by t.groupNickName asc")
+	List<String> findGroupNickNames(WxAccount account);
 	/**
 	 * 查询所有会话发起人
 	 */
-	@Query("select distinct t.toUserName from WxMsg t "
-			+ "where t.wxAccount=?1 and t.groupName is null and t.toUserName is not null "
-			+ "group by t.toUserName")
-	List<String> findToUserName(WxAccount account);
+	@Query("select distinct t.toContactNickName from WxMsg t "
+			+ "where t.wxAccount=?1 and t.groupNickName is null and t.toContactNickName is not null "
+			+ "group by t.toContactNickName")
+	List<String> findToContactNickName(WxAccount account);
 	/**
 	 * 查询所有会话接收人
 	 */
-	@Query("select distinct t.fromUserName from WxMsg t "
-			+ "where t.wxAccount=?1 and t.groupName is null and t.fromUserName is not null "
-			+ "group by t.fromUserName")
-	List<String> findFromUserName(WxAccount account);
+	@Query("select distinct t.fromContactNickName from WxMsg t "
+			+ "where t.wxAccount=?1 and t.groupNickName is null and t.fromContactNickName is not null "
+			+ "group by t.fromContactNickName")
+	List<String> findFromContactNickName(WxAccount account);
 }
 
 

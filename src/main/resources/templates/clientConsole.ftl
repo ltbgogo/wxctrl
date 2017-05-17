@@ -3,25 +3,33 @@
 <style>
 	#id_msg_list {border: 1px solid rgb(211, 211, 211); padding: 5px; height: 200px; overflow: scroll;}	
 	#id_msg_sender textarea {width: 99%; resize: none; border: 1px solid rgb(211, 211, 211); height: 80px;}
-	#id_back_btn {margin: 5px 0;}
+	#id_btn_grp {margin: 5px 0;}
 </style>
 
-<a id="id_back_btn" href="${app.contextPath}/wx/listClients" class="btn btn-default">
-	<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-</a>
+<!-- 操作按钮组 -->
+<div id="id_btn_grp" class="btn-group" role="group" aria-label="...">
+	<!-- 回退按钮 -->
+	<a href="${app.contextPath}/wx/listClients" class="btn btn-default">
+		<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+	</a>
+	<!-- 刷新页面按钮 -->
+	<a href="javascript: location.reload(true);" class="btn btn-default">
+		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+	</a>
+</div>
 
 <div class="row">
 	<!-- 联系人列表 -->
 	<div class="col-xs-3">
 		<div id="id_contact_list" class="list-group">
-			<#list groupNames as groupName>
+			<#list groupNickNames as name>
 				<a href="javascript: void(0);" class="list-group-item" attr-type="group">
-					<span class="glyphicon glyphicon-cloud"></span> <span class="cls_name">${groupName ?html}</span>
+					<span class="glyphicon glyphicon-cloud"></span> <span class="cls_name">${name ?html}</span>
 				</a>
 			</#list>
-			<#list individuals as individual>
+			<#list contactNickNames as name>
 				<a href="javascript: void(0);" class="list-group-item" attr-type="individual">
-					<span class="glyphicon glyphicon-user"></span> <span class="cls_name">${individual ?html}</span>
+					<span class="glyphicon glyphicon-user"></span> <span class="cls_name">${name ?html}</span>
 				</a>
 			</#list>
 		</div>
@@ -66,10 +74,6 @@ function sendMsg() {
 			nickName: $($g.contactATag).find(".cls_name").text(),
 			msg: msg,
 			_: new Date().getTime()	
-		}, function(r) {
-			if (r.success) {
-				refreshMsgList();	
-			}
 		}, "json");
 	}
 }
@@ -90,15 +94,22 @@ function refreshMsgList() {
 			$("#id_msg_list").empty();
 			$.each(data.result.content, function() {
 				var li = $('<li><b></b>&nbsp;<label></label><p></p></li>').appendTo("#id_msg_list");
-				if (this.fromUserName === null) {
-					this.fromUserName = "我";
+				//假如没有发送人，那么就是“我”发送的消息
+				if (this.fromContactNickName === null) {
+					this.fromContactNickName = "我";
 					li.addClass("text-right")
 				} else {
 					li.addClass("text-left");
 				}
-				li.find("label").html(this.fromUserName);
+				li.find("label").html(this.fromContactNickName);
 				li.find("b").text(this.createTime);
-				li.find("p").text(this.content)
+				//假如是图片消息
+				if (this.msgType == 3) {
+					li.find("p").html('<img style="width: 200px;" src="${app.contextPath}/wx_msg_img/' + this.msgId + '.jpg"/>');
+				} //否则就是文本消息 
+				else {
+					li.find("p").text(this.content)	
+				}
 			});
 			
 			$("#id_msg_list").scrollTop($("#id_msg_list").get(0).scrollHeight);
@@ -106,6 +117,9 @@ function refreshMsgList() {
 	}
 }
 
+/**
+ * 监听消息
+ */
 function startWebsocket() {
     //判断当前浏览器是否支持WebSocket
     if('WebSocket' in window){
@@ -120,12 +134,14 @@ function startWebsocket() {
 
     //连接成功建立的回调方法
     $g.websocket.onopen = function(event) {
-    	$g.websocket.send("uin:${account.uin}");
+    	$g.websocket.send("wxAccountId:${account.id}");
     };
 
     //接收到消息的回调方法
     $g.websocket.onmessage = function(event) {
-        log.console(event.data);
+    	if (event.data == "sync") {
+    		refreshMsgList();
+    	}
     };
 
     //连接关闭的回调方法
@@ -153,6 +169,8 @@ $(function() {
 		$g.contactATag = this;
 		refreshMsgList();
 	});
+	//启动消息同步监听
+	startWebsocket();
 });
 
 </script>
