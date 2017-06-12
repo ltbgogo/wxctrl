@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.abc.test.WebApplication;
-import com.abc.test.domain.WxAccount;
+import com.abc.wxctrl.WebApplication;
+import com.abc.wxctrl.domain.WxAccount;
 
 //@RunWith(SpringRunner.class)
 //@SpringBootTest(classes = {WebApplication.class})

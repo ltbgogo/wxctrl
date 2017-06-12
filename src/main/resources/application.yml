@@ -9,52 +9,37 @@ appconfig:
           description: my description
 
 spring:
-    #main:
-        #web_environment: false
-        #show_banner: false
-    application:
-        name: cruncher
-    activemq:
-        in-memory: true
-        pool:
+    h2:
+        console:
             enabled: false
+            settings.web-allow-others: true
     datasource:
         driverClassName: org.h2.Driver
         url: jdbc:h2:tcp://localhost:9092/d:/db/h2/wx
         username: test
         password: test
     freemarker:
+        expose-request-attributes: true
+        expose-session-attributes: true
+        expose-spring-macro-helpers: true
+        request-context-attribute: request
         settings: 
             classic_compatible: true
     jpa:
-        #database: H2
-        #show-sql: true
-        hibernate:
-            #ddl-auto: create-drop
-            naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
         properties:
             hibernate:
-                hbm2ddl.auto: update
+                hbm2ddl.auto: update #create update none
                 show_sql: true
-                #use_sql_comments: true
                 format_sql: true
-                #To enable load time / runtime weaving with Hibernate JPA and Spring Framework
-                #ejb.use_class_enhancer: true
-
-logging:
-    file: log.txt
-    #level:
-        #org.hibernate: INFO
-        #org.springframework.web: DEBUG
 
 security:
     basic:
         enabled: false
-    user:
-        name: test
-        password: 123
+        authorize-mode: NONE
 
 server:
     port: 80
-    #contextPath: /
+    #context-path: /wxctrl
+
+
    

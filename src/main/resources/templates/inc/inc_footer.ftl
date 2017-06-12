@@ -2,6 +2,8 @@
 </div>
 </div>
 </div>
-<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.6.1/mousetrap.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script src="${request.contextPath}/webjars/mousetrap/mousetrap.min.js"></script>
+<script src="${request.contextPath}/webjars/json2/json2.min.js"></script>
 </body>
 </html>
