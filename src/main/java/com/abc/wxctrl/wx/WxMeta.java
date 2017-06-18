@@ -5,17 +5,19 @@ import static com.abc.wxctrl.repository.RepoFactory.rf;
 import java.io.File;
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.StringUtils;
 
 import com.abc.wxctrl.config.AppConfigBean;
 import com.abc.wxctrl.domain.User;
 import com.abc.wxctrl.domain.WxAccount;
 import com.abc.wxctrl.manager.SpringManager;
-import com.abc.wxctrl.utility.JsonUtil;
+import com.abc.wxctrl.manager.UserManager;
 import com.abc.wxctrl.utility.httpclient.CookieStore;
 import com.abc.wxctrl.utility.httpclient.HttpClientConfig;
 import com.alibaba.fastjson.JSONArray;
@@ -39,9 +41,7 @@ public class WxMeta implements Serializable {
 	private String wxsid;
 	private String wxuin; //微信账号的唯一标志，要存储到数据库
 	private String pass_ticket;
-	private String deviceId = "e" + System.nanoTime();
 		
-	private JSONObject baseRequest;
 	private JSONObject syncKey;
 	private JSONObject user;
 		
@@ -55,10 +55,29 @@ public class WxMeta implements Serializable {
 	private transient WxMetaStatus metaStatus = WxMetaStatus.newMeta;
 	
 	/**
+	 * 获取BaseRequest
+	 */
+	public JSONObject getBaseRequest() {
+		JSONObject o = new JSONObject();
+		o.put("Uin", this.getWxuin());
+		o.put("Sid", this.getWxsid());
+		o.put("Skey", this.getSkey());
+		o.put("DeviceID", this.getDeviceId());
+		return o;
+	}
+	
+	/**
+	 * 获取DeviceId
+	 */
+	public String getDeviceId() {
+		return "e" + System.nanoTime();
+	}
+	
+	/**
 	 * 微信登录码图片
 	 */
 	public File getQrCodeImg() {
-		File qrCodeImg = FileUtils.getFile(WxConst.TMP_DIR, "qrcode", deviceId + ".jpg");
+		File qrCodeImg = FileUtils.getFile(WxConst.DATA_QRCODE_DIR, UserManager.getCurrent().getId() + ".jpg");
 		qrCodeImg.getParentFile().mkdirs();
 		return qrCodeImg;
 	}
@@ -119,7 +138,7 @@ public class WxMeta implements Serializable {
 	}
 
 	public WxDBService getDbService() {
-		return SpringManager.getBean(WxDBService.class);
+		return this.getBean(WxDBService.class);
 	}
 	
 	private transient WxMsgListener msgListener;
@@ -131,13 +150,24 @@ public class WxMeta implements Serializable {
 	}
 	
 	public WxMsg2DB getMsg2DB() {
-		WxMsg2DB msg2db = SpringManager.getBean(WxMsg2DB.class);
-		msg2db.setMeta(this);
-		return msg2db;
+		return getBean(WxMsg2DB.class);
+	}
+	
+	private <T extends WxMetaTemplate> T getBean(Class<T> requiredType) {
+		T o = SpringManager.getBean(requiredType);
+		o.setMeta(this);
+		return o;
 	}
 	
 	public static enum WxMetaStatus {
-		newMeta, waitForLogin, loginSuccess, destroied;
+		newMeta, waitForLogin, logining, loginSuccess, destroied;
+	}
+	
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@Setter
+	public static abstract class WxMetaTemplate {
+		protected WxMeta meta;
 	}
 }
 

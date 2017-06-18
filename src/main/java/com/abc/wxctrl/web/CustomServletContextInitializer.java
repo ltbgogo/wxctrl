@@ -14,8 +14,4 @@ public class CustomServletContextInitializer implements ServletContextInitialize
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		servletContext.setAttribute("app", AppConfigBean.INSTANCE);
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(Arrays.asList(1102, 1101).contains(1101));
-	}
 }

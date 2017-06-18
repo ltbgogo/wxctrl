@@ -3,46 +3,49 @@ package com.abc.wxctrl.wx;
 import static com.abc.wxctrl.repository.RepoFactory.rf;
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 
+import com.abc.wxctrl.domain.WxMsg.MsgType;
 import com.abc.wxctrl.utility.JsonUtil;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 @Log4j
 @AllArgsConstructor
-public class WxMsgHandler implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
+public class WxMsgHandler {
+		
 	private WxMeta meta;
 
 	/**
 	 * 处理消息
 	 */
+	@SneakyThrows
 	public void handleMsg(JSONObject data) {
-		if (data != null) {
-			for (JSONObject msg : JsonUtil.toList(data.getJSONArray("AddMsgList"), JSONObject.class)) {
-				String msgId = msg.getString("MsgId");
-				if (rf.getWxFriendMsgRepo().findByMsgId(msgId) == null && rf.getWxGroupMsgRepo().findByMsgId(msgId) == null) {
-					int msgType = msg.getIntValue("MsgType");
-					//微信初始化消息
-					if (msgType == 51) {
-						log.info("成功截获微信初始化消息");
-					} //文本消息 
-					else if (msgType == 1) {
-						this.persistMsg(msg);
-					} //图片消息 
-					else if (msgType == 3) {
-						this.persistMsg(msg);
-						meta.getHttpClient().webwxgetmsgimg(msgId);
-					} else if (msgType == 34) {
-//						webwxsendmsg(wechatMeta, "二蛋还不支持语音呢", msg.getString("FromUserName"));
-					} else if (msgType == 42) {
-//						log.info(name + " 给你发送了一张名片:");
-						log.info("=========================");
-					}
+		if (data == null) {
+			return;
+		}	
+		//假如没有消息，就睡眠一段时间，具体消息为空的原因尚不清楚，发送语音就会出现
+		JSONArray msgList = data.getJSONArray("AddMsgList");
+		if (msgList.size() == 0) {
+			TimeUnit.SECONDS.sleep(WxMetaStorage.size() * 30);
+			return;
+		}
+		//遍历消息
+		for (JSONObject msg : JsonUtil.toList(msgList, JSONObject.class)) {
+			String msgId = msg.getString("MsgId");
+			if (rf.getWxMsgRepo().findByMsgId(msgId) == null) {
+				switch (MsgType.of(msg.getIntValue("MsgType"))) {
+				case initMsg: 
+					log.info("成功截获微信初始化消息");
+					this.persistMsg(msg);
+					break;
+				default:
+					this.persistMsg(msg);
+					break;
 				}
 			}
 		}

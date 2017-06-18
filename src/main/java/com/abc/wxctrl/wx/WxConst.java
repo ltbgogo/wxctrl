@@ -15,11 +15,13 @@ public class WxConst {
 	public static final String QRCODE_URL = "https://login.weixin.qq.com/qrcode/";
 	
 	//一些常用键
-	public static final String KEY_USERNAME = "UserName",
-			KEY_HEAD_IMG_URL = "HeadImgUrl",
-			KEY_SEQ = "seq",
-			KEY_NICKNAME = "NickName",
-			KEY_REMARKNAME = "RemarkName";
+	public static final String KEY_USERNAME = "UserName";
+	public static final String KEY_HEAD_IMG_URL = "HeadImgUrl";
+	public static final String KEY_SEQ = "seq";
+	public static final String KEY_NICKNAME = "NickName";
+	public static final String KEY_REMARKNAME = "RemarkName";
+	public static final String KEY_MEMBERS_MAP = "MembersMap";
+	public static final String KEY_DISPLAY_NAME = "DisplayName";	
 	
 	//每次获取组成员信息的数量
 	public static final int MAX_NUM_FOR_GRP_MEM_INFO = 50;
@@ -29,7 +31,14 @@ public class WxConst {
 	//目录定义
 	public static final File TMP_DIR = FileUtils.getFile(FileUtils.getTempDirectory(), "wxctrl");
 	public static final File DATA_DIR = FileUtils.getFile("e://wxctrl_data");
+	//存储微信登陆码的目录，命名格式是：用户编号 + ".jpg"
+	public static final File DATA_QRCODE_DIR = FileUtils.getFile(DATA_DIR, "qrcode");
+	//以下文件存储路径根据msgId生成，采用三级目录模式
 	public static final File DATA_MSG_IMG_DIR = FileUtils.getFile(DATA_DIR, "msg_img");
+	public static final File DATA_MSG_VOICE_DIR = FileUtils.getFile(DATA_DIR, "msg_voice");
+	public static final File DATA_MSG_VEDIO_DIR = FileUtils.getFile(DATA_DIR, "msg_vedio");
+	//以下文件存储路径根据md5生成，采用三级目录模式
+	public static final File DATA_MSG_EMOTION_DIR = FileUtils.getFile(DATA_DIR, "msg_emotion");
 	
 	//特殊用户 须过滤
 	public static final List<String> FILTER_USERS = Arrays.asList("newsapp", "fmessage", "filehelper", "weibo", "qqmail", 

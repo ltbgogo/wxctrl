@@ -31,6 +31,7 @@ import com.abc.wxctrl.manager.SpringManager;
 import com.abc.wxctrl.repository.WxAccountRepository;
 import com.abc.wxctrl.utility.TxExecutor;
 import com.abc.wxctrl.utility.spec.Processor;
+import com.abc.wxctrl.wx.WxMeta.WxMetaStatus;
 import com.alibaba.fastjson.JSONObject;
 
 @Log4j
@@ -97,6 +98,19 @@ public class WxMetaStorage {
 				}
 			}
 		});
+	}
+	
+	/***
+	 * 获取在线账号数量
+	 */
+	public static int size() {
+		int size = 0;
+		for (WxMeta meta : data.values()) {
+			if (meta.getMetaStatus() != WxMetaStatus.destroied) {
+				size++;
+			}
+		}
+		return size;
 	}
 	
 	/**

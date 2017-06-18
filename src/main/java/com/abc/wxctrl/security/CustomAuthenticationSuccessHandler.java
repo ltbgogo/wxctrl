@@ -20,7 +20,7 @@ class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessH
     	if (response.isCommitted()) {
             logger.debug("Response has already been committed. Unable to redirect!");
         } else {
-        	redirectStrategy.sendRedirect(request, response, "/wx/home/listAccount");
+        	redirectStrategy.sendRedirect(request, response, "/wx/home/account/listAccount");
         }
     }
 }

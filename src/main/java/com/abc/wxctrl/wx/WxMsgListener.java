@@ -16,12 +16,9 @@ import com.abc.wxctrl.wx.WxMeta.WxMetaStatus;
 import com.alibaba.fastjson.JSONObject;
 
 @Log4j
+@AllArgsConstructor
 public class WxMsgListener {
 
-	public WxMsgListener(WxMeta meta) {
-		this.meta = meta;
-	}
-	
 	private WxMeta meta;
 	
 	public void start() {
@@ -56,7 +53,7 @@ public class WxMsgListener {
 					log.info("你在手机上登出了微信，再见");
 					break;
 				}else if(syncStatus.getIntValue("retcode") == 0) {
-					if(syncStatus.getIntValue("selector") == 2) {
+ 					if(syncStatus.getIntValue("selector") == 2) {
 						JSONObject data = meta.getHttpClient().webwxsync();
 						meta.getMsgHandler().handleMsg(data);
 					} else if(syncStatus.getIntValue("selector") == 6) {
@@ -78,8 +75,8 @@ public class WxMsgListener {
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}			
-			log.info("等待5s...");
-			TimeUnit.SECONDS.sleep(5);
+			log.info("等待10s...");
+			TimeUnit.SECONDS.sleep(WxMetaStorage.size() * 10);
 		}
 	}	
 }

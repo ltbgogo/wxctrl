@@ -1,6 +1,7 @@
 package com.abc.wxctrl.wx;
 
 import java.io.File;
+import java.io.RandomAccessFile;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -12,11 +13,16 @@ import lombok.extern.log4j.Log4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Document;
 
+import com.abc.wxctrl.config.AppConfigBean;
 import com.abc.wxctrl.utility.CollUtil;
 import com.abc.wxctrl.utility.DateUtil;
+import com.abc.wxctrl.utility.FileUtil;
 import com.abc.wxctrl.utility.JsonUtil;
+import com.abc.wxctrl.utility.Locker;
 import com.abc.wxctrl.utility.RegexUtil;
+import com.abc.wxctrl.utility.XmlUtil;
 import com.abc.wxctrl.utility.httpclient.HttpClient;
 import com.abc.wxctrl.utility.httpclient.HttpClientConfig;
 import com.abc.wxctrl.wx.WxMeta.WxMetaStatus;
@@ -32,20 +38,78 @@ public class WxHttpClient {
 	private HttpClientConfig httpClientConfig;
 	
 	/**
-	 * 下载消息图片
+	 * 下载动画表情消息
 	 */
 	@SneakyThrows
-	public File webwxgetmsgimg(String msgId) {
+	public void downloadEmotion(String msgContent) {
+		msgContent = msgContent.replace("&lt;", "<").replace("&gt;", ">");
+		Document doc = XmlUtil.XU.getDocument(msgContent);
+		String md5 = XmlUtil.XU.getString("/msg/emoji/@md5", doc);
+		String cdnurl = XmlUtil.XU.getString("/msg/emoji/@cdnurl", doc);
+		//?????????????分布式线程问题？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+		File file = FileUtils.getFile(WxConst.DATA_MSG_EMOTION_DIR, FileUtil.get3LevelsPath(md5));
+		if (!file.exists()) {
+			@Cleanup
+			Locker locker = Locker.lock(md5);
+			if (!file.exists()) {
+				file.getParentFile().mkdirs();
+				@Cleanup
+				HttpClient c = new HttpClient(cdnurl);
+				c.setHttpProxy(AppConfigBean.INSTANCE.getHttpProxy());
+				c.connect();
+				FileUtils.copyInputStreamToFile(c.getResponseByStream(), file);
+			}
+		}
+	}
+
+	/**
+	 * 下载图片消息
+	 */
+	@SneakyThrows
+	public void webwxgetmsgimg(String msgId) {
 		@Cleanup
 		HttpClient c = meta.getHttpClient().createHttpClient(meta.getBase_uri() + "/webwxgetmsgimg");
 		c.getQueryMap().put("MsgID", msgId);
 		c.getQueryMap().put("skey", meta.getSkey());
 		c.connect();
-		File file = FileUtils.getFile(WxConst.DATA_MSG_IMG_DIR, msgId + ".jpg");
+		File file = FileUtils.getFile(WxConst.DATA_MSG_IMG_DIR, FileUtil.get3LevelsPath(msgId) + ".jpg");
 		file.getParentFile().mkdirs();
 		FileUtils.copyInputStreamToFile(c.getResponseByStream(), file);
 		log.info("保存消息图片：" + file);
-		return file;
+	}
+	
+	/**
+	 * 下载视频消息
+	 */
+	@SneakyThrows
+	public void webwxgetvideo(String msgId) {
+		@Cleanup
+		HttpClient c = meta.getHttpClient().createHttpClient(meta.getBase_uri() + "/webwxgetvideo");
+		c.getConnection().setRequestProperty("Range", "bytes=0-");
+		c.getQueryMap().put("msgid", msgId);
+		c.getQueryMap().put("skey", meta.getSkey());
+		c.connect();
+		File file = FileUtils.getFile(WxConst.DATA_MSG_VEDIO_DIR, FileUtil.get3LevelsPath(msgId) + ".mp4");
+		file.getParentFile().mkdirs();
+		FileUtils.copyInputStreamToFile(c.getResponseByStream(), file);
+		log.info("保存消息视频：" + file);
+	}
+	
+	/**
+	 * 下载语音消息
+	 */
+	@SneakyThrows
+	public void webwxgetvoice(String msgId) {
+		@Cleanup
+		HttpClient c = meta.getHttpClient().createHttpClient(meta.getBase_uri() + "/webwxgetvoice");
+		c.getRequestHeaderMap().put("Range", "bytes=0-");
+		c.getQueryMap().put("msgid", msgId);
+		c.getQueryMap().put("skey", meta.getSkey());
+		c.connect();
+		File file = FileUtils.getFile(WxConst.DATA_MSG_VOICE_DIR, FileUtil.get3LevelsPath(msgId) + ".mp3");
+		file.getParentFile().mkdirs();
+		FileUtils.copyInputStreamToFile(c.getResponseByStream(), file);
+		log.info("保存消息语音：" + file);
 	}
 	
 	/**
@@ -62,18 +126,15 @@ public class WxHttpClient {
 				if (StringUtils.isNotBlank(contact.getString(WxConst.KEY_NICKNAME))) {
 					//将群聊成员列表转成Map形式，键是UserName, 便于后面去成员信息
 					JSONObject membersMap = JsonUtil.toMap(contact.getJSONArray("MemberList"), WxConst.KEY_USERNAME);
-					contact.put("MemberList", membersMap);
-					//获取seq信息
-					String headImgUrl = contact.getString(WxConst.KEY_HEAD_IMG_URL);
-					contact.put(WxConst.KEY_SEQ, Long.parseLong(StringUtils.substringBetween(headImgUrl, "seq=", "&")));
+					contact.put(WxConst.KEY_MEMBERS_MAP, membersMap);
+					contact.remove("MemberList");	
+					//设置显示名称
+					contact.put(WxConst.KEY_DISPLAY_NAME, this.getDisplayName(contact));
 					//将组放到元数据中
 					meta.getGroups().put(contact.getString(WxConst.KEY_USERNAME), contact);
-					
-					//同步群聊信息到数据库
-					meta.getDbService().syncGroup(meta.getWxAccount(), contact);
 				}
 				//休眠，怕请求频繁被墙
-				TimeUnit.SECONDS.sleep(1);
+				TimeUnit.SECONDS.sleep(WxMetaStorage.size() * 1);
 			}
 		}
 	}
@@ -123,13 +184,8 @@ public class WxHttpClient {
 			else if (contact.getString("UserName").equals(meta.getUser().getString("UserName"))) {
 			} //常规联系人 
 			else {
-				String headImgUrl = contact.getString(WxConst.KEY_HEAD_IMG_URL);
-				///cgi-bin/mmwebwx-bin/webwxgeticon?seq=649556693&username=@eaecf81792d3166a9d5acea588831a1b&skey=@crypt_b26ec12f_e42db0adfd77d46ac34270982f8f188
-				contact.put(WxConst.KEY_SEQ, Long.parseLong(StringUtils.substringBetween(headImgUrl, "seq=", "&")));
+				contact.put(WxConst.KEY_DISPLAY_NAME, this.getDisplayName(contact));
 				this.meta.getFriends().put(contact.getString(WxConst.KEY_USERNAME), contact);
-				
-				//同步朋友信息到数据库
-				meta.getDbService().syncFriend(meta.getWxAccount(), contact);
 			}
 		}
 	}
@@ -200,7 +256,7 @@ public class WxHttpClient {
 			} else {
 				log.info("扫描code=" + code);
 			}
-			TimeUnit.MICROSECONDS.sleep(25063);;
+			TimeUnit.MICROSECONDS.sleep(WxMetaStorage.size() * 25063);;
 		}
 	}
 	
@@ -216,12 +272,6 @@ public class WxHttpClient {
 		meta.setWxsid(RegexUtil.matchFirstGroup(data, "<wxsid>(\\S+)</wxsid>"));
 		meta.setWxuin(RegexUtil.matchFirstGroup(data, "<wxuin>(\\S+)</wxuin>"));
 		meta.setPass_ticket(RegexUtil.matchFirstGroup(data, "<pass_ticket>(\\S+)</pass_ticket>"));
-
-		meta.setBaseRequest(new JSONObject());
-		meta.getBaseRequest() .put("Uin", meta.getWxuin());
-		meta.getBaseRequest() .put("Sid", meta.getWxsid());
-		meta.getBaseRequest() .put("Skey", meta.getSkey());
-		meta.getBaseRequest() .put("DeviceID", meta.getDeviceId());
 	}
 
 	/**
@@ -296,7 +346,7 @@ public class WxHttpClient {
 	public JSONObject syncCheck() {
 		@Cleanup
 		HttpClient c = createHttpClient(meta.getWebpush_url());
-		c.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
+		c.setMethod("get");
 		c.getQueryMap().put("r", System.nanoTime());
 		c.getQueryMap().put("skey",	meta.getSkey());
 		c.getQueryMap().put("uin", meta.getWxuin());
@@ -305,12 +355,12 @@ public class WxHttpClient {
 		c.getQueryMap().put("synckey", meta.getSynckeyStr()); 
 		c.getQueryMap().put("_", System.currentTimeMillis());
 		
-		System.out.println(meta.getWebpush_url());
-		System.out.println(c.getQueryMap());
+		log.info(meta.getWebpush_url());
+		log.info(c.getQueryMap());
 		c.connect();
 		////window.synccheck={retcode:"0",selector:"0"}
 		JSONObject data = this.parseWxSpec(c.getResponseByString()).getJSONObject("window.synccheck");
-		System.out.println(data);
+		log.info(data);
 		//new int[] {data.getIntValue("retcode"), data.getIntValue("selector")};
 		return data;
 	}
@@ -318,14 +368,14 @@ public class WxHttpClient {
 	/**
 	 * 发送消息
 	 */
-	public void webwxsendmsg(String msgContent, String to) {
+	public void webwxsendmsg(String msgContent, String toUserName) {
 		String clientMsgId = System.nanoTime() + "";
 		JSONObject Msg = new JSONObject();
 		//1应该是文本消息
 		Msg.put("Type", 1);
 		Msg.put("Content", msgContent);
 		Msg.put("FromUserName", meta.getUser().getString("UserName"));
-		Msg.put("ToUserName", to);
+		Msg.put("ToUserName", toUserName);
 		Msg.put("LocalID", clientMsgId);
 		Msg.put("ClientMsgId", clientMsgId);
 		
@@ -338,7 +388,6 @@ public class WxHttpClient {
 		c.connect();
 		
 		log.info("发送消息..." + msgContent);
-		
 	}
 	
 	public JSONObject webwxsync(){
@@ -348,7 +397,7 @@ public class WxHttpClient {
 		c.getQueryMap().put("sid", meta.getWxsid());
 		c.getContentJSONObject().put("BaseRequest", meta.getBaseRequest());
 		c.getContentJSONObject().put("SyncKey", meta.getSyncKey());
-		c.getContentJSONObject().put("rr", DateUtil.seconds());
+		c.getContentJSONObject().put("rr", ~DateUtil.seconds());
 		c.connect();
 		
 		JSONObject data = c.getResponseByJsonObject();
@@ -375,5 +424,12 @@ public class WxHttpClient {
 			}
 		}
 		return itemMap;
+	}
+	
+	private String getDisplayName(JSONObject contact) {
+		if (StringUtils.isNotBlank(contact.getString(WxConst.KEY_REMARKNAME))) {
+			return contact.getString(WxConst.KEY_REMARKNAME);
+		}
+		return contact.getString(WxConst.KEY_NICKNAME);
 	}
 }

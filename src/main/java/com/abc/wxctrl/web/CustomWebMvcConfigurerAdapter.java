@@ -27,7 +27,9 @@ public class CustomWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     	//微信图片消息映射路径
-        registry.addResourceHandler("/wx_msg_img/**").addResourceLocations("file:" + WxConst.DATA_MSG_IMG_DIR + "//");
+    	for (File dir : WxConst.DATA_DIR.listFiles()) {
+    		registry.addResourceHandler("/" + dir.getName() + "/**").addResourceLocations("file:" + dir + "//");	
+    	}
         super.addResourceHandlers(registry);
     }
 	
@@ -36,7 +38,7 @@ public class CustomWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
      */
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-	    registry.addViewController("/").setViewName("redirect:/wx/home/listAccount");
+	    registry.addViewController("/").setViewName("redirect:/wx/home/account/listAccount");
 	    registry.addViewController("/sso/login").setViewName("/sso/login");	    
 	}
 

@@ -37,8 +37,8 @@ public class WxApp {
 			public void run() {
 				try {
 					meta.setMetaStatus(WxMetaStatus.waitForLogin);
-					
 					meta.getHttpClient().waitForLogin();
+					meta.setMetaStatus(WxMetaStatus.logining);
 					
 					meta.getHttpClient().login();
 					log.info("微信登录成功");

@@ -9,6 +9,9 @@ appconfig:
           description: my description
 
 spring:
+    devtools:
+        restart:
+            enabled: false 
     h2:
         console:
             enabled: false
