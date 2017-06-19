@@ -28,7 +28,7 @@ public class CustomWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     	//微信图片消息映射路径
     	for (File dir : WxConst.DATA_DIR.listFiles()) {
-    		registry.addResourceHandler("/" + dir.getName() + "/**").addResourceLocations("file:" + dir + "//");	
+    		registry.addResourceHandler("/wx_resources/" + dir.getName() + "/**").addResourceLocations("file:" + dir + "//");	
     	}
         super.addResourceHandlers(registry);
     }

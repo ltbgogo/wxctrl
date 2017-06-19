@@ -80,7 +80,7 @@ function addClient() {
 	$.get("${request.contextPath}/wx/home/account/addAccount", function(r) {
 		if (r.success) {
 			//显示登录扫描码
-			$("#id_qrcode").attr("src", "${request.contextPath}/qrcode/${app.current.id}.jpg?_=" + new Date().getTime()).removeClass("hidden");
+			$("#id_qrcode").attr("src", "${request.contextPath}/wx_resources/qrcode/${app.current.id}.jpg?_=" + new Date().getTime()).removeClass("hidden");
 			//检查监听状态
 			setInterval(function() {
 				$.get("${request.contextPath}/wx/home/account/checkLoginStatus", function(r) {

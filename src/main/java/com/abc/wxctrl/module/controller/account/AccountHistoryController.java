@@ -72,10 +72,10 @@ public class AccountHistoryController {
      * 获取对话内容
      */
     @RequestMapping("showMsgList")
-    ResultVO showMsgList(String wxAccountId, String type, String contactName, @PageableDefault(value = 15, sort = {"createTime"}, direction = Direction.DESC) Pageable pageable) {
-    	WxAccount account = rf.getWxAccountRepo().findOne(wxAccountId);
+    ResultVO showMsgList(String accountId, String contactType, String contactName, @PageableDefault(value = 50, sort = {"createTime"}, direction = Direction.DESC) Pageable pageable) {
+    	WxAccount account = rf.getWxAccountRepo().findOne(accountId);
     	Page<WxMsg> page = null;
-    	if ("group".equals(type)) {
+    	if ("group".equals(contactType)) {
     		page = rf.getWxMsgRepo().findGroupMsgs(account, contactName, pageable);
     	} else {
     		page = rf.getWxMsgRepo().findFriendMsgs(account, contactName, pageable);

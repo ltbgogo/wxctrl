@@ -114,7 +114,7 @@ public class WxMetaStorage {
 	}
 	
 	/**
-	 * 返回缓存文件路径
+	 * 返回缓存文件路径，是否每隔一段时间缓存一次？？？？？
 	 */
 	private static File getCacheFile(String wxAccountId) {
 		return FileUtils.getFile(WxConst.TMP_DIR, "wxmeta", wxAccountId);
